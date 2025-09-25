@@ -1,0 +1,245 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Bengali Bangla (`bn`).
+class AppLocalizationsBn extends AppLocalizations {
+  AppLocalizationsBn([String locale = 'bn']) : super(locale);
+
+  @override
+  String get appTitle => 'কৃষি উপদেষ্টা AI';
+
+  @override
+  String get welcome => 'কৃষি উপদেষ্টা AI এ আপনাকে স্বাগতম';
+
+  @override
+  String get welcomeMessage =>
+      'উন্নত ফসল ব্যবস্থাপনার জন্য আপনার স্মার্ট কৃষি সঙ্গী';
+
+  @override
+  String get signIn => 'সাইন ইন';
+
+  @override
+  String get signUp => 'সাইন আপ';
+
+  @override
+  String get signOut => 'সাইন আউট';
+
+  @override
+  String get email => 'ইমেইল';
+
+  @override
+  String get password => 'পাসওয়ার্ড';
+
+  @override
+  String get confirmPassword => 'পাসওয়ার্ড নিশ্চিত করুন';
+
+  @override
+  String get name => 'পূর্ণ নাম';
+
+  @override
+  String get phoneNumber => 'ফোন নম্বর';
+
+  @override
+  String get forgotPassword => 'পাসওয়ার্ড ভুলে গেছেন?';
+
+  @override
+  String get createAccount => 'অ্যাকাউন্ট তৈরি করুন';
+
+  @override
+  String get alreadyHaveAccount => 'ইতিমধ্যে অ্যাকাউন্ট আছে?';
+
+  @override
+  String get dontHaveAccount => 'অ্যাকাউন্ট নেই?';
+
+  @override
+  String get selectLanguage => 'ভাষা নির্বাচন করুন';
+
+  @override
+  String get farmDetails => 'খামারের বিবরণ';
+
+  @override
+  String get location => 'অবস্থান';
+
+  @override
+  String get farmName => 'খামারের নাম';
+
+  @override
+  String get farmSize => 'খামারের আকার (একর)';
+
+  @override
+  String get soilType => 'মাটির ধরন';
+
+  @override
+  String get primaryCrops => 'প্রাথমিক ফসলগুলি';
+
+  @override
+  String get next => 'পরবর্তী';
+
+  @override
+  String get back => 'পিছনে';
+
+  @override
+  String get finish => 'শেষ';
+
+  @override
+  String get dashboard => 'ড্যাশবোর্ড';
+
+  @override
+  String get todaysWeather => 'আজকের আবহাওয়া';
+
+  @override
+  String get marketPrices => 'বাজারের দাম';
+
+  @override
+  String get recentDiagnosis => 'সাম্প্রতিক নির্ণয়';
+
+  @override
+  String get askQuestion => 'প্রশ্ন জিজ্ঞাসা করুন';
+
+  @override
+  String get viewAll => 'সব দেখুন';
+
+  @override
+  String get plantDiagnosis => 'উদ্ভিদ নির্ণয়';
+
+  @override
+  String get capturePhoto => 'ছবি তোলা';
+
+  @override
+  String get selectFromGallery => 'গ্যালারি থেকে নির্বাচন করুন';
+
+  @override
+  String get analyzing => 'বিশ্লেষণ করা হচ্ছে...';
+
+  @override
+  String get result => 'নির্ণয়ের ফলাফল';
+
+  @override
+  String get confidence => 'আত্মবিশ্বাস';
+
+  @override
+  String get treatments => 'পরামর্শিত চিকিৎসা';
+
+  @override
+  String get history => 'নির্ণয়ের ইতিহাস';
+
+  @override
+  String get chat => 'চ্যাট';
+
+  @override
+  String get askAnything => 'কৃষি সম্পর্কে যেকোনো কিছু জিজ্ঞাসা করুন...';
+
+  @override
+  String get typeMessage => 'আপনার বার্তা টাইপ করুন...';
+
+  @override
+  String get speak => 'বলুন';
+
+  @override
+  String get listening => 'শোনা হচ্ছে...';
+
+  @override
+  String get newChat => 'নতুন চ্যাট';
+
+  @override
+  String get weather => 'আবহাওয়া';
+
+  @override
+  String get forecast => 'পূর্বাভাস';
+
+  @override
+  String get alerts => 'সতর্কবার্তা';
+
+  @override
+  String get temperature => 'তাপমাত্রা';
+
+  @override
+  String get humidity => 'আর্দ্রতা';
+
+  @override
+  String get windSpeed => 'বাতাসের গতি';
+
+  @override
+  String get uvIndex => 'UV সূচক';
+
+  @override
+  String get priceAlerts => 'দামের সতর্কবার্তা';
+
+  @override
+  String get trends => 'প্রবণতা';
+
+  @override
+  String get createAlert => 'সতর্কবার্তা তৈরি করুন';
+
+  @override
+  String get crop => 'ফসল';
+
+  @override
+  String get price => 'দাম';
+
+  @override
+  String get market => 'বাজার';
+
+  @override
+  String get date => 'তারিখ';
+
+  @override
+  String get profile => 'প্রোফাইল';
+
+  @override
+  String get settings => 'সেটিংস';
+
+  @override
+  String get language => 'ভাষা';
+
+  @override
+  String get notifications => 'বিজ্ঞপ্তি';
+
+  @override
+  String get about => 'সম্পর্কে';
+
+  @override
+  String get help => 'সাহায্য';
+
+  @override
+  String get feedback => 'প্রতিক্রিয়া';
+
+  @override
+  String get loading => 'লোড হচ্ছে...';
+
+  @override
+  String get error => 'ত্রুটি';
+
+  @override
+  String get retry => 'পুনরায় চেষ্টা করুন';
+
+  @override
+  String get cancel => 'বাতিল করুন';
+
+  @override
+  String get save => 'সংরক্ষণ করুন';
+
+  @override
+  String get delete => 'মুছে ফেলুন';
+
+  @override
+  String get edit => 'সম্পাদনা করুন';
+
+  @override
+  String get search => 'অনুসন্ধান করুন';
+
+  @override
+  String get filter => 'ফিল্টার';
+
+  @override
+  String get sort => 'সাজান';
+
+  @override
+  String get noData => 'কোনও ডেটা নেই';
+
+  @override
+  String get comingSoon => 'শীঘ্রই আসছে';
+}

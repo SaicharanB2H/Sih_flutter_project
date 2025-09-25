@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/simple_auth_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../shared/theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -62,9 +64,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    final languageProvider = Provider.of<LanguageProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Account'),
+        title: Text(localizations.createAccount),
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: AppTheme.textPrimary,
@@ -82,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 24),
 
                     Text(
-                      'Join AgriAdvisor AI',
+                      localizations.createAccount,
                       style: Theme.of(context).textTheme.headlineSmall
                           ?.copyWith(
                             color: AppTheme.primaryGreen,
@@ -101,16 +106,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     const SizedBox(height: 32),
 
+                    // Language Selection
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              localizations.selectLanguage,
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.primaryGreen,
+                                  ),
+                            ),
+                            const SizedBox(height: 12),
+                            DropdownButtonFormField<String>(
+                              value: languageProvider.locale.languageCode,
+                              items: languageProvider.supportedLanguagesList
+                                  .map((entry) {
+                                    return DropdownMenuItem<String>(
+                                      value: entry.key,
+                                      child: Text(entry.value['nativeName']!),
+                                    );
+                                  })
+                                  .toList(),
+                              onChanged: (value) {
+                                if (value != null) {
+                                  languageProvider.changeLanguage(value);
+                                }
+                              },
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
                     // Name Field
                     TextFormField(
                       controller: _nameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Full Name',
-                        prefixIcon: Icon(Icons.person_outlined),
+                      decoration: InputDecoration(
+                        labelText: localizations.name,
+                        prefixIcon: const Icon(Icons.person_outlined),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your full name';
+                          return localizations.name;
                         }
                         if (value.trim().length < 2) {
                           return 'Name must be at least 2 characters';
@@ -125,13 +172,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        prefixIcon: Icon(Icons.email_outlined),
+                      decoration: InputDecoration(
+                        labelText: localizations.email,
+                        prefixIcon: const Icon(Icons.email_outlined),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your email';
+                          return localizations.email;
                         }
                         if (!RegExp(
                           r'^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$',
@@ -148,9 +195,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextFormField(
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
-                      decoration: const InputDecoration(
-                        labelText: 'Phone Number (Optional)',
-                        prefixIcon: Icon(Icons.phone_outlined),
+                      decoration: InputDecoration(
+                        labelText: '${localizations.phoneNumber} (Optional)',
+                        prefixIcon: const Icon(Icons.phone_outlined),
                       ),
                     ),
 
@@ -161,7 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _passwordController,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        labelText: 'Password',
+                        labelText: localizations.password,
                         prefixIcon: const Icon(Icons.lock_outlined),
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -178,7 +225,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
+                          return localizations.password;
                         }
                         if (value.length < 6) {
                           return 'Password must be at least 6 characters';
@@ -194,7 +241,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _confirmPasswordController,
                       obscureText: _obscureConfirmPassword,
                       decoration: InputDecoration(
-                        labelText: 'Confirm Password',
+                        labelText: localizations.confirmPassword,
                         prefixIcon: const Icon(Icons.lock_outlined),
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -212,7 +259,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please confirm your password';
+                          return localizations.confirmPassword;
                         }
                         if (value != _passwordController.text) {
                           return 'Passwords do not match';
@@ -237,7 +284,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ),
                             )
-                          : const Text('Create Account'),
+                          : Text(localizations.createAccount),
                     ),
 
                     const SizedBox(height: 24),
@@ -246,14 +293,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Already have an account? '),
+                        Text('${localizations.alreadyHaveAccount} '),
                         TextButton(
                           onPressed: authProvider.isLoading
                               ? null
                               : () {
                                   Navigator.pop(context);
                                 },
-                          child: const Text('Sign In'),
+                          child: Text(localizations.signIn),
                         ),
                       ],
                     ),

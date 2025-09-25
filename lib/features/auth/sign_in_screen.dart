@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/simple_auth_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../shared/theme/app_theme.dart';
 import 'sign_up_screen.dart';
+import '../../l10n/app_localizations.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -79,6 +81,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    final languageProvider = Provider.of<LanguageProvider>(context);
+
     return Scaffold(
       body: SafeArea(
         child: Consumer<SimpleAuthProvider>(
@@ -90,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 60),
+                    const SizedBox(height: 40),
 
                     // Logo and Title
                     Icon(
@@ -101,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     const SizedBox(height: 24),
 
                     Text(
-                      'AgriAdvisor AI',
+                      localizations.appTitle,
                       style: Theme.of(context).textTheme.headlineMedium
                           ?.copyWith(
                             color: AppTheme.primaryGreen,
@@ -111,26 +116,68 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
 
                     Text(
-                      'Your smart farming companion',
+                      localizations.welcomeMessage,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: AppTheme.textSecondary,
                       ),
                       textAlign: TextAlign.center,
                     ),
 
-                    const SizedBox(height: 48),
+                    const SizedBox(height: 32),
+
+                    // Language Selection
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              localizations.selectLanguage,
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.primaryGreen,
+                                  ),
+                            ),
+                            const SizedBox(height: 12),
+                            DropdownButtonFormField<String>(
+                              value: languageProvider.locale.languageCode,
+                              items: languageProvider.supportedLanguagesList
+                                  .map((entry) {
+                                    return DropdownMenuItem<String>(
+                                      value: entry.key,
+                                      child: Text(entry.value['nativeName']!),
+                                    );
+                                  })
+                                  .toList(),
+                              onChanged: (value) {
+                                if (value != null) {
+                                  languageProvider.changeLanguage(value);
+                                }
+                              },
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
 
                     // Email Field
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        prefixIcon: Icon(Icons.email_outlined),
+                      decoration: InputDecoration(
+                        labelText: localizations.email,
+                        prefixIcon: const Icon(Icons.email_outlined),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your email';
+                          return localizations.email;
                         }
                         if (!RegExp(
                           r'^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$',
@@ -148,7 +195,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       controller: _passwordController,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        labelText: 'Password',
+                        labelText: localizations.password,
                         prefixIcon: const Icon(Icons.lock_outlined),
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -165,7 +212,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
+                          return localizations.password;
                         }
                         return null;
                       },
@@ -180,7 +227,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: authProvider.isLoading
                             ? null
                             : _forgotPassword,
-                        child: const Text('Forgot Password?'),
+                        child: Text(localizations.forgotPassword),
                       ),
                     ),
 
@@ -200,7 +247,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                               ),
                             )
-                          : const Text('Sign In'),
+                          : Text(localizations.signIn),
                     ),
 
                     const SizedBox(height: 24),
@@ -209,7 +256,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have an account? "),
+                        Text("${localizations.dontHaveAccount} "),
                         TextButton(
                           onPressed: authProvider.isLoading
                               ? null
@@ -222,7 +269,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ),
                                   );
                                 },
-                          child: const Text('Sign Up'),
+                          child: Text(localizations.signUp),
                         ),
                       ],
                     ),

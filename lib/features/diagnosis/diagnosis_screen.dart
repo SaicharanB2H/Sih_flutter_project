@@ -8,6 +8,7 @@ import 'dart:io';
 import '../../core/providers/simple_auth_provider.dart';
 import '../../core/services/storage_service.dart';
 import '../../shared/theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 class DiagnosisScreen extends StatefulWidget {
   const DiagnosisScreen({super.key});
@@ -642,9 +643,11 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Plant Diagnosis'),
+        title: Text(localizations.plantDiagnosis),
         backgroundColor: AppTheme.primaryGreen,
         foregroundColor: Colors.white,
       ),
@@ -668,17 +671,19 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'How to get the best results',
+                          'How to get the best results', // Hardcoded as it's not in the localization file
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
-                    const Text('• Take clear, well-lit photos'),
-                    const Text('• Focus on affected areas'),
-                    const Text('• Include leaves, stems, or fruits'),
-                    const Text('• Avoid blurry or dark images'),
+                    const Text('• Take clear, well-lit photos'), // Hardcoded
+                    const Text('• Focus on affected areas'), // Hardcoded
+                    const Text(
+                      '• Include leaves, stems, or fruits',
+                    ), // Hardcoded
+                    const Text('• Avoid blurry or dark images'), // Hardcoded
                   ],
                 ),
               ),
@@ -704,11 +709,11 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                       ),
                       const SizedBox(height: 12),
                       if (_isAnalyzing)
-                        const Column(
+                        Column(
                           children: [
-                            CircularProgressIndicator(),
-                            SizedBox(height: 8),
-                            Text('Analyzing your plant...'),
+                            const CircularProgressIndicator(),
+                            const SizedBox(height: 8),
+                            Text(localizations.analyzing),
                           ],
                         )
                       else if (_result != null)
@@ -746,7 +751,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                                           ),
                                     ),
                                     Text(
-                                      'Confidence: ${(_result!.confidence * 100).toStringAsFixed(1)}%',
+                                      '${localizations.confidence}: ${(_result!.confidence * 100).toStringAsFixed(1)}%',
                                       style: Theme.of(
                                         context,
                                       ).textTheme.bodySmall,
@@ -773,7 +778,9 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
               onPressed: _isAnalyzing ? null : _showImageSourceDialog,
               icon: const Icon(Icons.camera_alt),
               label: Text(
-                _selectedImage == null ? 'Take Photo' : 'Take Another Photo',
+                _selectedImage == null
+                    ? localizations.capturePhoto
+                    : '${localizations.capturePhoto} Again', // Using existing key with "Again" added
               ),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(16),
@@ -793,7 +800,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Recent Diagnoses',
+                          localizations.history,
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
@@ -803,17 +810,17 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                               // Show history screen
                               _showHistoryDialog();
                             },
-                            child: const Text('View All'),
+                            child: Text(localizations.viewAll),
                           ),
                       ],
                     ),
                     const SizedBox(height: 12),
                     _recentDiagnoses.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
-                              'No previous diagnoses\nTake your first plant photo!',
+                              'No previous diagnoses\nTake your first plant photo!', // Hardcoded
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.grey),
+                              style: const TextStyle(color: Colors.grey),
                             ),
                           )
                         : Column(
@@ -852,7 +859,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                                             ),
                                           ),
                                           Text(
-                                            '${(diagnosis.confidence * 100).toStringAsFixed(0)}% confidence',
+                                            '${localizations.confidence}: ${(diagnosis.confidence * 100).toStringAsFixed(0)}%',
                                             style: const TextStyle(
                                               fontSize: 12,
                                               color: Colors.grey,

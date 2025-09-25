@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import '../../shared/theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 class WorkingWeatherScreen extends StatefulWidget {
   const WorkingWeatherScreen({super.key});
@@ -277,9 +278,11 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weather'),
+        title: Text(localizations.weather),
         backgroundColor: AppTheme.primaryBlue,
         foregroundColor: Colors.white,
         actions: [
@@ -289,7 +292,7 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
               if (!mounted) return;
               setState(() {
                 _isLoading = true;
-                _status = 'Refreshing...';
+                _status = localizations.loading; // Using existing key
               });
               _getCurrentLocationAndWeather();
             },
@@ -301,7 +304,7 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
           if (!mounted) return;
           setState(() {
             _isLoading = true;
-            _status = 'Refreshing...';
+            _status = localizations.loading; // Using existing key
           });
           await _getCurrentLocationAndWeather();
         },
@@ -415,7 +418,7 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Weather Details',
+                        '${localizations.weather} Details', // Partially localized
                         style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
@@ -424,14 +427,14 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
                         children: [
                           Expanded(
                             child: _buildDetailItem(
-                              'Humidity',
+                              localizations.humidity,
                               '$_humidity%',
                               Icons.water_drop,
                             ),
                           ),
                           Expanded(
                             child: _buildDetailItem(
-                              'Wind Speed',
+                              localizations.windSpeed,
                               '$_windSpeed km/h',
                               Icons.air,
                             ),
@@ -475,7 +478,7 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              'App Status',
+                              'App Status', // Hardcoded as it's a section title
                               style: Theme.of(context).textTheme.titleMedium
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
@@ -510,7 +513,9 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
                                     _getCurrentLocationAndWeather();
                                   },
                             icon: const Icon(Icons.refresh),
-                            label: const Text('Retry'),
+                            label: Text(
+                              localizations.retry,
+                            ), // Using existing key
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppTheme.primaryGreen,
                               foregroundColor: Colors.white,
@@ -522,17 +527,29 @@ class _WorkingWeatherScreenState extends State<WorkingWeatherScreen> {
                       const Divider(),
                       const SizedBox(height: 8),
                       Text(
-                        'Technical Details',
+                        'Technical Details', // Hardcoded as it's a section title
                         style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
-                      Text('API Key: ${_weatherApiKey.substring(0, 8)}...'),
-                      Text('Default Location: Delhi (28.6139, 77.2090)'),
-                      Text('Loading: $_isLoading'),
-                      Text('✅ Weather API: Working'),
-                      Text('✅ Location Services: Available'),
-                      Text('✅ Network Security: Configured'),
+                      Text(
+                        'API Key: ${_weatherApiKey.substring(0, 8)}...',
+                      ), // Hardcoded as it's technical info
+                      Text(
+                        'Default Location: Delhi (28.6139, 77.2090)',
+                      ), // Hardcoded as it's technical info
+                      Text(
+                        'Loading: $_isLoading',
+                      ), // Hardcoded as it's technical info
+                      Text(
+                        '✅ Weather API: Working',
+                      ), // Hardcoded as it's technical info
+                      Text(
+                        '✅ Location Services: Available',
+                      ), // Hardcoded as it's technical info
+                      Text(
+                        '✅ Network Security: Configured',
+                      ), // Hardcoded as it's technical info
                     ],
                   ),
                 ),

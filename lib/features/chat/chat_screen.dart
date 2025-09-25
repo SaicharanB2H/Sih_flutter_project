@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -11,6 +10,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import '../../core/services/storage_service.dart';
 import '../../shared/theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 // Map Indian states/UTs -> STT locale (underscore style) and TTS (converted to BCP-47 with hyphen)
 const Map<String, String> _stateToLocale = {
@@ -154,14 +154,6 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     _initLocationBasedVoice();
-    _messages.add(
-      ChatMessage(
-        text:
-            'Hello! I\'m your Agrow AI assistant powered by Gemini 2.0! How can I help you with your farming today? You can also send me photos of your crops for analysis and suggestions, or use voice input by tapping the microphone! I can also read my responses aloud in your local language.',
-        isUser: false,
-        timestamp: DateTime.now(),
-      ),
-    );
   }
 
   @override
@@ -354,10 +346,12 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _showImageSourceDialog() {
+    final localizations = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Select Image Source'),
+        title: Text(localizations.plantDiagnosis), // Using existing key
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -366,8 +360,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 Icons.camera_alt,
                 color: AppTheme.primaryGreen,
               ),
-              title: const Text('Camera'),
-              subtitle: const Text('Take a photo of your crop'),
+              title: Text(localizations.capturePhoto),
+              subtitle: Text(localizations.capturePhoto), // Using existing key
               onTap: () {
                 Navigator.pop(context);
                 _pickImageFromCamera();
@@ -378,8 +372,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 Icons.photo_library,
                 color: AppTheme.primaryBlue,
               ),
-              title: const Text('Gallery'),
-              subtitle: const Text('Choose from your photos'),
+              title: Text(localizations.selectFromGallery),
+              subtitle: Text(
+                localizations.selectFromGallery,
+              ), // Using existing key
               onTap: () {
                 Navigator.pop(context);
                 _pickImageFromGallery();
@@ -390,7 +386,7 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(localizations.cancel),
           ),
         ],
       ),
@@ -398,10 +394,12 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _showApiKeyDialog() {
+    final localizations = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Gemini 2.0 AI'),
+        title: Text('Gemini 2.0 AI'), // Hardcoded as it's a specific name
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -412,15 +410,15 @@ class _ChatScreenState extends State<ChatScreen> {
               size: 48,
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Powered by Google Gemini 2.0 Flash',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              'Powered by Google Gemini 2.0', // Hardcoded as it's a specific name
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               'Your AI agricultural advisor is ready to help with expert farming guidance, crop management, and sustainable agriculture practices.',
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -431,18 +429,18 @@ class _ChatScreenState extends State<ChatScreen> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: AppTheme.lightGreen),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.check_circle,
                     color: AppTheme.successGreen,
                     size: 16,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'API configured and ready!',
-                      style: TextStyle(
+                      'API configured and ready!', // Hardcoded as it's a status message
+                      style: const TextStyle(
                         fontSize: 12,
                         color: AppTheme.successGreen,
                         fontWeight: FontWeight.bold,
@@ -457,7 +455,7 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Got it!'),
+            child: Text(localizations.save), // Using existing key
           ),
         ],
       ),
@@ -604,6 +602,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8FFFE),
       appBar: AppBar(
@@ -638,9 +638,9 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Agrow AI Assistant',
-                    style: TextStyle(
+                  Text(
+                    '${localizations.chat} AI Assistant', // Using existing key
+                    style: const TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
@@ -649,8 +649,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   Text(
                     _localeReady
-                        ? 'Voice: $_regionLabel ($_chosenLocale)'
-                        : 'Powered by Gemini 2.0 • Online',
+                        ? 'Voice: $_regionLabel ($_chosenLocale)' // Hardcoded as it's technical info
+                        : 'Powered by Gemini 2.0 • Online', // Hardcoded as it's a specific name
                     style: TextStyle(
                       fontSize: 12,
                       color: AppTheme.primaryGreen,
@@ -692,7 +692,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 size: 20,
               ),
               onPressed: _isSpeaking ? _stopSpeaking : null,
-              tooltip: _isSpeaking ? 'Stop reading' : 'Voice reading enabled',
+              tooltip: _isSpeaking
+                  ? 'Stop reading'
+                  : 'Voice reading enabled', // Hardcoded tooltips
             ),
           ),
           Container(
@@ -717,7 +719,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 size: 20,
               ),
               onPressed: _showApiKeyDialog,
-              tooltip: 'Settings & Info',
+              tooltip: localizations.settings, // Using existing key
             ),
           ),
         ],
@@ -774,9 +776,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: const Icon(Icons.eco, size: 48, color: Colors.white),
                   ),
                   const SizedBox(height: 24),
-                  const Text(
-                    'Welcome to Agrow AI Assistant!',
-                    style: TextStyle(
+                  Text(
+                    localizations.welcome, // Using existing key
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
@@ -795,9 +797,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 28),
-                  const Text(
-                    'Quick Start:',
-                    style: TextStyle(
+                  Text(
+                    'Quick Start:', // Hardcoded as it's a section title
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
@@ -810,28 +812,28 @@ class _ChatScreenState extends State<ChatScreen> {
                     alignment: WrapAlignment.center,
                     children: [
                       _buildSuggestionChip(
-                        '🌾 Crop diseases',
-                        'What are common wheat diseases?',
+                        '🌾 Crop diseases', // Hardcoded as examples
+                        'What are common wheat diseases?', // Hardcoded as examples
                       ),
                       _buildSuggestionChip(
-                        '🌱 Soil health',
-                        'How to improve soil fertility?',
+                        '🌱 Soil health', // Hardcoded as examples
+                        'How to improve soil fertility?', // Hardcoded as examples
                       ),
                       _buildSuggestionChip(
-                        '🌦️ Weather advice',
-                        'Best planting time for corn?',
+                        '🌦️ Weather advice', // Hardcoded as examples
+                        'Best planting time for corn?', // Hardcoded as examples
                       ),
                       _buildSuggestionChip(
-                        '🐛 Pest control',
-                        'Natural pest control methods',
+                        '🐛 Pest control', // Hardcoded as examples
+                        'Natural pest control methods', // Hardcoded as examples
                       ),
                       _buildSuggestionChip(
-                        '📸 Photo analysis',
-                        'Take a photo to analyze',
+                        '📸 Photo analysis', // Hardcoded as examples
+                        'Take a photo to analyze', // Hardcoded as examples
                       ),
                       _buildSuggestionChip(
-                        '🎤 Voice input',
-                        'Try voice input by tapping the microphone',
+                        '🎤 Voice input', // Hardcoded as examples
+                        'Try voice input by tapping the microphone', // Hardcoded as examples
                       ),
                     ],
                   ),
@@ -942,7 +944,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                           const SizedBox(width: 12),
                           Text(
-                            'AI is analyzing and preparing response...',
+                            localizations.analyzing, // Using existing key
                             style: TextStyle(
                               color: AppTheme.primaryGreen,
                               fontSize: 14,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/simple_auth_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../shared/theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -94,6 +96,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    final languageProvider = Provider.of<LanguageProvider>(context);
+
     return WillPopScope(
       onWillPop: () async {
         if (_currentPage > 0) {
@@ -104,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Setup Your Farm'),
+          title: Text(localizations.farmDetails),
           backgroundColor: AppTheme.primaryGreen,
           foregroundColor: Colors.white,
           leading: _currentPage > 0
@@ -113,6 +118,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPressed: _previousPage,
                 )
               : null,
+          actions: [
+            // Language selection button in app bar
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.language),
+              onSelected: (String languageCode) {
+                languageProvider.changeLanguage(languageCode);
+              },
+              itemBuilder: (BuildContext context) {
+                return languageProvider.supportedLanguagesList.map((entry) {
+                  return PopupMenuItem<String>(
+                    value: entry.key,
+                    child: Text(
+                      entry.value['nativeName']!,
+                      style: TextStyle(
+                        fontWeight:
+                            entry.key == languageProvider.locale.languageCode
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                  );
+                }).toList();
+              },
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -148,9 +178,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   });
                 },
                 children: [
-                  _buildWelcomePage(),
-                  _buildFarmDetailsPage(),
-                  _buildCropSelectionPage(),
+                  _buildWelcomePage(localizations),
+                  _buildFarmDetailsPage(localizations),
+                  _buildCropSelectionPage(localizations),
                 ],
               ),
             ),
@@ -164,7 +194,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Expanded(
                       child: OutlinedButton(
                         onPressed: _previousPage,
-                        child: const Text('Back'),
+                        child: Text(localizations.back),
                       ),
                     ),
                   if (_currentPage > 0) const SizedBox(width: 16),
@@ -182,7 +212,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           _nextPage();
                         }
                       },
-                      child: Text(_currentPage == 2 ? 'Finish' : 'Next'),
+                      child: Text(
+                        _currentPage == 2
+                            ? localizations.finish
+                            : localizations.next,
+                      ),
                     ),
                   ),
                 ],
@@ -194,7 +228,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildWelcomePage() {
+  Widget _buildWelcomePage(AppLocalizations localizations) {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -207,7 +241,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 32),
           Text(
-            'Welcome to AgriAdvisor AI!',
+            localizations.welcome,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               color: AppTheme.primaryGreen,
               fontWeight: FontWeight.bold,
@@ -245,7 +279,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildFarmDetailsPage() {
+  Widget _buildFarmDetailsPage(AppLocalizations localizations) {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Form(
@@ -254,7 +288,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Farm Details',
+              localizations.farmDetails,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 color: AppTheme.primaryGreen,
                 fontWeight: FontWeight.bold,
@@ -269,14 +303,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             TextFormField(
               controller: _farmNameController,
-              decoration: const InputDecoration(
-                labelText: 'Farm Name',
-                prefixIcon: Icon(Icons.agriculture),
+              decoration: InputDecoration(
+                labelText: localizations.farmName,
+                prefixIcon: const Icon(Icons.agriculture),
                 hintText: 'Enter your farm name',
               ),
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Please enter your farm name';
+                  return localizations.farmName;
                 }
                 return null;
               },
@@ -287,14 +321,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             TextFormField(
               controller: _farmSizeController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Farm Size (Acres)',
-                prefixIcon: Icon(Icons.straighten),
+              decoration: InputDecoration(
+                labelText: localizations.farmSize,
+                prefixIcon: const Icon(Icons.straighten),
                 hintText: 'Enter farm size in acres',
               ),
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Please enter your farm size';
+                  return localizations.farmSize;
                 }
                 final size = double.tryParse(value);
                 if (size == null || size <= 0) {
@@ -311,14 +345,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildCropSelectionPage() {
+  Widget _buildCropSelectionPage(AppLocalizations localizations) {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Primary Crops',
+            localizations.primaryCrops,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: AppTheme.primaryGreen,
               fontWeight: FontWeight.bold,

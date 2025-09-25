@@ -5,11 +5,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'firebase_options.dart';
 // import 'core/providers/auth_provider.dart';
 import 'core/providers/simple_auth_provider.dart';
+import 'core/providers/language_provider.dart';
 import 'core/services/storage_service.dart';
 import 'shared/theme/app_theme.dart';
 import 'features/auth/sign_in_screen.dart';
 import 'features/onboarding/onboarding_screen.dart';
 import 'features/home/home_screen.dart';
+import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,27 +33,29 @@ class AgriApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => SimpleAuthProvider())],
-      child: MaterialApp(
-        title: 'Agrow',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''), // English
-          Locale('hi', ''), // Hindi
-          Locale('ta', ''), // Tamil
-          Locale('te', ''), // Telugu
-          Locale('kn', ''), // Kannada
-          Locale('ml', ''), // Malayalam
-        ],
-        home: const AuthWrapper(),
-        debugShowCheckedModeBanner: false,
+      providers: [
+        ChangeNotifierProvider(create: (_) => SimpleAuthProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
+      ],
+      child: Consumer<LanguageProvider>(
+        builder: (context, languageProvider, child) {
+          return MaterialApp(
+            title: 'Agrow',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.system,
+            locale: languageProvider.locale,
+            localizationsDelegates: [
+              ...AppLocalizations.localizationsDelegates,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: const AuthWrapper(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
       ),
     );
   }

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/simple_auth_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../shared/theme/app_theme.dart';
 import '../../features/diagnosis/diagnosis_screen.dart';
 import '../../features/chat/chat_screen.dart';
 import '../../features/weather/working_weather_screen.dart';
 import '../../features/soil/soil_detection_screen.dart';
 import '../../features/market/market_prices_dialog.dart';
+import '../../features/settings/language_settings_screen.dart';
+import '../../l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -92,9 +95,11 @@ class DashboardTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agrow'),
+        title: Text(localizations.appTitle),
         actions: [
           IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
         ],
@@ -274,6 +279,8 @@ class DashboardTab extends StatelessWidget {
     required Color color,
     required VoidCallback onTap,
   }) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Card(
       child: InkWell(
         onTap: onTap,
@@ -286,7 +293,7 @@ class DashboardTab extends StatelessWidget {
               Icon(icon, size: 40, color: color),
               const SizedBox(height: 12),
               Text(
-                title,
+                _getLocalizedTitle(context, title),
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -294,7 +301,7 @@ class DashboardTab extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                subtitle,
+                _getLocalizedSubtitle(context, subtitle),
                 style: Theme.of(
                   context,
                 ).textTheme.bodySmall?.copyWith(color: AppTheme.textSecondary),
@@ -306,6 +313,46 @@ class DashboardTab extends StatelessWidget {
       ),
     );
   }
+
+  String _getLocalizedTitle(BuildContext context, String title) {
+    final localizations = AppLocalizations.of(context)!;
+
+    // Map English titles to localized ones
+    switch (title) {
+      case 'Plant Diagnosis':
+        return localizations.plantDiagnosis;
+      case 'Ask AI':
+        return localizations.askQuestion;
+      case 'Weather':
+        return localizations.weather;
+      case 'Soil Analysis':
+        return localizations.soilType;
+      case 'Market Prices':
+        return localizations.marketPrices;
+      default:
+        return title;
+    }
+  }
+
+  String _getLocalizedSubtitle(BuildContext context, String subtitle) {
+    final localizations = AppLocalizations.of(context)!;
+
+    // Map English subtitles to localized ones
+    switch (subtitle) {
+      case 'Scan your crops':
+        return localizations.capturePhoto;
+      case 'Get farming advice':
+        return localizations.askAnything;
+      case 'Check forecast':
+        return localizations.forecast;
+      case 'Detect soil type':
+        return localizations.soilType;
+      case 'Real-time crop prices':
+        return localizations.marketPrices;
+      default:
+        return subtitle;
+    }
+  }
 }
 
 class DiagnosisTab extends StatelessWidget {
@@ -313,9 +360,11 @@ class DiagnosisTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Plant Diagnosis')),
-      body: const Center(child: Text('Diagnosis feature coming soon')),
+      appBar: AppBar(title: Text(localizations.plantDiagnosis)),
+      body: Center(child: Text(localizations.comingSoon)),
     );
   }
 }
@@ -325,9 +374,11 @@ class ChatTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('AI Chat')),
-      body: const Center(child: Text('Chat feature coming soon')),
+      appBar: AppBar(title: Text(localizations.chat)),
+      body: Center(child: Text(localizations.comingSoon)),
     );
   }
 }
@@ -337,9 +388,11 @@ class WeatherTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Weather')),
-      body: const Center(child: Text('Weather feature coming soon')),
+      appBar: AppBar(title: Text(localizations.weather)),
+      body: Center(child: Text(localizations.comingSoon)),
     );
   }
 }
@@ -349,8 +402,11 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    final languageProvider = Provider.of<LanguageProvider>(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(title: Text(localizations.profile)),
       body: Consumer<SimpleAuthProvider>(
         builder: (context, authProvider, child) {
           return ListView(
@@ -390,26 +446,33 @@ class ProfileTab extends StatelessWidget {
 
               ListTile(
                 leading: const Icon(Icons.language),
-                title: const Text('Language'),
-                subtitle: const Text('English'),
-                onTap: () {},
+                title: Text(localizations.language),
+                subtitle: Text(languageProvider.currentLanguageNativeName),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen(),
+                    ),
+                  );
+                },
               ),
 
               ListTile(
                 leading: const Icon(Icons.notifications),
-                title: const Text('Notifications'),
+                title: Text(localizations.notifications),
                 onTap: () {},
               ),
 
               ListTile(
                 leading: const Icon(Icons.help),
-                title: const Text('Help & Support'),
+                title: Text(localizations.help),
                 onTap: () {},
               ),
 
               ListTile(
                 leading: const Icon(Icons.info),
-                title: const Text('About'),
+                title: Text(localizations.about),
                 onTap: () {},
               ),
 
@@ -417,8 +480,8 @@ class ProfileTab extends StatelessWidget {
 
               ListTile(
                 leading: const Icon(Icons.logout, color: AppTheme.errorRed),
-                title: const Text(
-                  'Sign Out',
+                title: Text(
+                  localizations.signOut,
                   style: TextStyle(color: AppTheme.errorRed),
                 ),
                 onTap: () async {
