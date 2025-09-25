@@ -394,8 +394,15 @@ class _ChatScreenState extends State<ChatScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.grey[100],
+              color: Colors.white,
               border: Border(top: BorderSide(color: Colors.grey[300]!)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 4,
+                  offset: const Offset(0, -2),
+                ),
+              ],
             ),
             child: Column(
               children: [
@@ -441,37 +448,86 @@ class _ChatScreenState extends State<ChatScreen> {
                 // Input row
                 Row(
                   children: [
-                    IconButton(
-                      onPressed: _showImageSourceDialog,
-                      icon: const Icon(
-                        Icons.camera_alt,
-                        color: AppTheme.primaryGreen,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.primaryGreen.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                      tooltip: 'Add photo',
-                    ),
-                    Expanded(
-                      child: TextField(
-                        controller: _messageController,
-                        decoration: const InputDecoration(
-                          hintText:
-                              'Ask me about farming or send a crop photo...',
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
+                      child: IconButton(
+                        onPressed: _showImageSourceDialog,
+                        icon: const Icon(
+                          Icons.camera_alt,
+                          color: AppTheme.primaryGreen,
                         ),
-                        maxLines: null,
-                        textInputAction: TextInputAction.send,
-                        onSubmitted: (_) => _sendMessage(),
+                        tooltip: 'Add photo',
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 0, 0, 0),
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(
+                            color: Colors.grey[400]!,
+                            width: 1.5,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 3,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: _messageController,
+                          onTap: () {
+                            // Add visual feedback on tap
+                            if (mounted) {
+                              setState(() {
+                                // Force rebuild to show focus state
+                              });
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Type your farming question here...',
+                            hintStyle: TextStyle(
+                              color: const Color.fromARGB(255, 234, 234, 234),
+                              fontSize: 16,
+                            ),
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            filled: false,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 15,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          cursorColor: AppTheme.primaryGreen,
+                          cursorWidth: 2,
+                          maxLines: null,
+                          textInputAction: TextInputAction.send,
+                          onSubmitted: (_) => _sendMessage(),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    IconButton(
-                      onPressed: _sendMessage,
-                      icon: const Icon(
-                        Icons.send,
+                    Container(
+                      decoration: BoxDecoration(
                         color: AppTheme.primaryGreen,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: IconButton(
+                        onPressed: _sendMessage,
+                        icon: const Icon(Icons.send, color: Colors.white),
+                        tooltip: 'Send message',
                       ),
                     ),
                   ],

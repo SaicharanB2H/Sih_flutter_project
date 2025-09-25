@@ -5,6 +5,8 @@ import '../../shared/theme/app_theme.dart';
 import '../../features/diagnosis/diagnosis_screen.dart';
 import '../../features/chat/chat_screen.dart';
 import '../../features/weather/working_weather_screen.dart';
+import '../../features/soil/soil_detection_screen.dart';
+import '../../features/market/market_prices_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -196,52 +198,32 @@ class DashboardTab extends StatelessWidget {
                 ),
                 _buildActionCard(
                   context,
+                  icon: Icons.landscape,
+                  title: 'Soil Analysis',
+                  subtitle: 'Detect soil type',
+                  color: Color(0xFF8B4513),
+                  onTap: () {
+                    // Navigate to soil detection screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SoilDetectionScreen(),
+                      ),
+                    );
+                  },
+                ),
+                _buildActionCard(
+                  context,
                   icon: Icons.trending_up,
                   title: 'Market Prices',
-                  subtitle: 'View crop prices',
+                  subtitle: 'Real-time crop prices',
                   color: AppTheme.secondaryGreen,
                   onTap: () {
-                    // Show market prices dialog
+                    // Show real-time market prices dialog
                     showDialog(
                       context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Market Prices'),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ListTile(
-                              leading: const Icon(
-                                Icons.grain,
-                                color: AppTheme.primaryGreen,
-                              ),
-                              title: const Text('Rice'),
-                              trailing: const Text('₹2,500/quintal'),
-                            ),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.grain,
-                                color: AppTheme.warningOrange,
-                              ),
-                              title: const Text('Wheat'),
-                              trailing: const Text('₹2,100/quintal'),
-                            ),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.eco,
-                                color: AppTheme.secondaryGreen,
-                              ),
-                              title: const Text('Tomato'),
-                              trailing: const Text('₹1,800/quintal'),
-                            ),
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('Close'),
-                          ),
-                        ],
-                      ),
+                      barrierDismissible: false,
+                      builder: (context) => const MarketPricesDialog(),
                     );
                   },
                 ),

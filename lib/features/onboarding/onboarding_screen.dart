@@ -18,17 +18,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   // Farm details
   final _farmNameController = TextEditingController();
   final _farmSizeController = TextEditingController();
-  String? _selectedSoilType;
   final List<String> _selectedCrops = [];
-
-  final List<String> _soilTypes = [
-    'Clay Soil',
-    'Sandy Soil',
-    'Loamy Soil',
-    'Silt Soil',
-    'Peat Soil',
-    'Chalk Soil',
-  ];
 
   final List<String> _cropOptions = [
     'Rice',
@@ -226,7 +216,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Let\'s set up your farm profile to provide you with personalized agricultural advice.',
+            'Let\'s set up your farm profile to provide you with personalized agricultural advice. We\'ll automatically detect your soil type using location data.',
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
@@ -243,7 +233,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 const Icon(Icons.info_outline, color: AppTheme.primaryGreen),
                 const SizedBox(height: 8),
                 Text(
-                  'This will help us provide better recommendations for your specific crops and farming conditions.',
+                  'We will automatically detect your soil type based on your location to provide better recommendations for your specific crops and farming conditions.',
                   style: Theme.of(context).textTheme.bodyMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -269,6 +259,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 color: AppTheme.primaryGreen,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Tell us about your farm. We\'ll detect soil type automatically using your location.',
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 24),
 
@@ -310,28 +305,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
 
             const SizedBox(height: 16),
-
-            DropdownButtonFormField<String>(
-              initialValue: _selectedSoilType,
-              decoration: const InputDecoration(
-                labelText: 'Soil Type',
-                prefixIcon: Icon(Icons.landscape),
-              ),
-              items: _soilTypes.map((soil) {
-                return DropdownMenuItem(value: soil, child: Text(soil));
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedSoilType = value;
-                });
-              },
-              validator: (value) {
-                if (value == null) {
-                  return 'Please select your soil type';
-                }
-                return null;
-              },
-            ),
           ],
         ),
       ),
