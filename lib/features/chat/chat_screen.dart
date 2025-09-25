@@ -1,10 +1,122 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' as ui;
 import '../../core/services/storage_service.dart';
 import '../../shared/theme/app_theme.dart';
+
+// Map Indian states/UTs -> STT locale (underscore style) and TTS (converted to BCP-47 with hyphen)
+const Map<String, String> _stateToLocale = {
+  // South
+  'Tamil Nadu': 'ta_IN',
+  'Karnataka': 'kn_IN',
+  'Kerala': 'ml_IN',
+  'Andhra Pradesh': 'te_IN',
+  'Telangana': 'te_IN',
+  'Puducherry': 'ta_IN',
+  'Lakshadweep': 'ml_IN',
+  // West
+  'Maharashtra': 'mr_IN',
+  'Goa': 'en_IN', // device TTS often lacks Konkani; fallback to English India
+  'Gujarat': 'gu_IN',
+  'Dadra and Nagar Haveli and Daman and Diu': 'gu_IN',
+  // East
+  'Odisha': 'or_IN',
+  'West Bengal': 'bn_IN',
+  'Andaman and Nicobar Islands': 'en_IN',
+  // North/North-Central
+  'Delhi': 'hi_IN',
+  'Haryana': 'hi_IN',
+  'Punjab': 'pa_IN',
+  'Himachal Pradesh': 'hi_IN',
+  'Jammu and Kashmir': 'hi_IN',
+  'Ladakh': 'hi_IN',
+  'Rajasthan': 'hi_IN',
+  'Uttar Pradesh': 'hi_IN',
+  'Uttarakhand': 'hi_IN',
+  'Madhya Pradesh': 'hi_IN',
+  'Chhattisgarh': 'hi_IN',
+  'Bihar': 'hi_IN',
+  'Jharkhand': 'hi_IN',
+  // North‑East
+  'Assam': 'as_IN',
+  'Sikkim': 'en_IN',
+  'Meghalaya': 'en_IN',
+  'Mizoram': 'en_IN',
+  'Nagaland': 'en_IN',
+  'Manipur': 'en_IN',
+  'Arunachal Pradesh': 'en_IN',
+  'Tripura': 'bn_IN',
+};
+
+Future<Position> _getPosition() async {
+  final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) throw Exception('Location services disabled');
+  var permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+  }
+  if (permission == LocationPermission.denied ||
+      permission == LocationPermission.deniedForever) {
+    throw Exception('Location permission denied');
+  }
+  return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+}
+
+Future<(String countryCode, String? state)> _getRegion() async {
+  final pos = await _getPosition();
+  final marks = await placemarkFromCoordinates(pos.latitude, pos.longitude);
+  final m = marks.first;
+  final cc = (m.isoCountryCode ?? '').toUpperCase();
+  final state = m.administrativeArea; // often state/UT name
+  return (cc.isEmpty ? 'IN' : cc, state);
+}
+
+String _normalizeState(String? s) {
+  if (s == null) return '';
+  return s.trim();
+}
+
+String _pickLocaleForRegion(String countryCode, String? state) {
+  // Prioritize India mappings; else fallback to device locale or en_IN
+  if (countryCode == 'IN') {
+    final st = _normalizeState(state);
+    // exact match
+    if (_stateToLocale.containsKey(st)) return _stateToLocale[st]!;
+    // heuristic substring checks (handles variants like NCT of Delhi)
+    final lower = st.toLowerCase();
+    if (lower.contains('delhi')) return 'hi_IN';
+    if (lower.contains('tamil')) return 'ta_IN';
+    if (lower.contains('karnataka')) return 'kn_IN';
+    if (lower.contains('kerala')) return 'ml_IN';
+    if (lower.contains('andhra')) return 'te_IN';
+    if (lower.contains('telangana')) return 'te_IN';
+    if (lower.contains('maharashtra')) return 'mr_IN';
+    if (lower.contains('gujarat')) return 'gu_IN';
+    if (lower.contains('odisha') || lower.contains('orissa')) return 'or_IN';
+    if (lower.contains('bengal')) return 'bn_IN';
+    if (lower.contains('assam')) return 'as_IN';
+    if (lower.contains('punjab')) return 'pa_IN';
+    // default within India
+    return 'hi_IN';
+  }
+  // Fallback to device locale or en_IN
+  final device = ui.PlatformDispatcher.instance.locale; // e.g., en_IN
+  final devStr = '${device.languageCode}_${device.countryCode ?? 'IN'}';
+  return devStr.isNotEmpty ? devStr : 'en_IN';
+}
+
+String _toBcp47(String underscoreLocale) {
+  // speech_to_text uses underscore, flutter_tts prefers hyphen (BCP-47)
+  return underscoreLocale.replaceAll('_', '-'); // e.g., hi-IN
+}
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -21,13 +133,31 @@ class _ChatScreenState extends State<ChatScreen> {
   String _apiKey = 'AIzaSyDjghcnRP4_WmY3HxkGZPnVJg-hMEbKtJw';
   File? _selectedImage;
 
+  // Speech to text variables
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  bool _speechEnabled = false;
+  String _lastWords = '';
+
+  // Text to speech variables
+  late FlutterTts _tts;
+  bool _ttsEnabled = false;
+  bool _isSpeaking = false;
+
+  // Location-based locale variables
+  String _chosenLocale = 'en_IN'; // STT localeId
+  String _chosenBcp47 = 'en-IN'; // TTS language
+  String _regionLabel = 'Detecting location...';
+  bool _localeReady = false;
+
   @override
   void initState() {
     super.initState();
+    _initLocationBasedVoice();
     _messages.add(
       ChatMessage(
         text:
-            'Hello! I\'m your Agrow AI assistant powered by Gemini 2.0! How can I help you with your farming today? You can also send me photos of your crops for analysis and suggestions!',
+            'Hello! I\'m your Agrow AI assistant powered by Gemini 2.0! How can I help you with your farming today? You can also send me photos of your crops for analysis and suggestions, or use voice input by tapping the microphone! I can also read my responses aloud in your local language.',
         isUser: false,
         timestamp: DateTime.now(),
       ),
@@ -37,6 +167,12 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void dispose() {
     _messageController.dispose();
+    if (_speech.isListening) {
+      _speech.stop();
+    }
+    if (_isSpeaking) {
+      _tts.stop();
+    }
     super.dispose();
   }
 
@@ -91,6 +227,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
         // Save chat to storage
         await _saveChatToStorage(userMessage, response);
+
+        // Read the AI response aloud using TTS
+        if (_ttsEnabled && _localeReady) {
+          await _speakText(response);
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -323,6 +464,144 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  /// Initialize location-based voice functionality
+  Future<void> _initLocationBasedVoice() async {
+    try {
+      // Determine locale from location
+      final (cc, st) = await _getRegion();
+      final sttLocale = _pickLocaleForRegion(cc, st); // e.g., hi_IN
+      final ttsLocale = _toBcp47(sttLocale); // e.g., hi-IN
+      _chosenLocale = sttLocale;
+      _chosenBcp47 = ttsLocale;
+      _regionLabel = '$st, $cc';
+
+      // Init STT
+      _speech = stt.SpeechToText();
+      _speechEnabled = await _speech.initialize(
+        onStatus: (s) => debugPrint('STT status: $s'),
+        onError: (e) => debugPrint('STT error: $e'),
+      );
+
+      // Init TTS with selected locale
+      _tts = FlutterTts();
+      await _tts.setLanguage(_chosenBcp47);
+      await _tts.setSpeechRate(
+        0.4,
+      ); // Much slower speech rate for better comprehension
+      await _tts.setPitch(1.0);
+      _ttsEnabled = true;
+      _localeReady = true;
+    } catch (e) {
+      // On failure, fallback to device locale
+      final dev = ui.PlatformDispatcher.instance.locale;
+      _chosenLocale = '${dev.languageCode}_${dev.countryCode ?? 'IN'}';
+      _chosenBcp47 = _toBcp47(_chosenLocale);
+      _regionLabel = 'Fallback to device locale';
+
+      _speech = stt.SpeechToText();
+      _speechEnabled = await _speech.initialize();
+      _tts = FlutterTts();
+      await _tts.setLanguage(_chosenBcp47);
+      await _tts.setSpeechRate(
+        0.4,
+      ); // Much slower speech rate for fallback mode too
+      _ttsEnabled = true;
+      _localeReady = true;
+    }
+    if (mounted) setState(() {});
+  }
+
+  /// Start listening to speech input with location-based locale
+  void _startListening() async {
+    if (!_speechEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Speech recognition not available on this device'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    _lastWords = '';
+    await _speech.listen(
+      localeId: _chosenLocale, // Use location-based locale
+      listenMode: stt.ListenMode.dictation,
+      partialResults: true,
+      onResult: (result) {
+        setState(() {
+          if (result.finalResult) {
+            _lastWords = result.recognizedWords;
+            _messageController.text = _lastWords;
+          } else {
+            // Show partial results in real-time
+            _messageController.text = result.recognizedWords;
+          }
+        });
+      },
+      listenFor: const Duration(seconds: 30),
+      pauseFor: const Duration(seconds: 5),
+    );
+
+    setState(() {
+      _isListening = true;
+    });
+  }
+
+  /// Stop listening to speech input
+  void _stopListening() async {
+    await _speech.stop();
+    setState(() {
+      _isListening = false;
+    });
+  }
+
+  /// Toggle speech listening
+  void _toggleListening() {
+    if (_isListening) {
+      _stopListening();
+    } else {
+      _startListening();
+    }
+  }
+
+  /// Speak text using TTS with location-based locale
+  Future<void> _speakText(String text) async {
+    if (!_ttsEnabled || !_localeReady) return;
+
+    setState(() {
+      _isSpeaking = true;
+    });
+
+    try {
+      await _tts.setLanguage(_chosenBcp47);
+      await _tts.setSpeechRate(0.4); // Ensure much slower speech rate
+      await _tts.speak(text);
+
+      // Wait for TTS to complete
+      _tts.setCompletionHandler(() {
+        if (mounted) {
+          setState(() {
+            _isSpeaking = false;
+          });
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _isSpeaking = false;
+      });
+      debugPrint('TTS error: $e');
+    }
+  }
+
+  /// Stop current TTS playback
+  Future<void> _stopSpeaking() async {
+    await _tts.stop();
+    setState(() {
+      _isSpeaking = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -369,7 +648,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                   Text(
-                    'Powered by Gemini 2.0 • Online',
+                    _localeReady
+                        ? 'Voice: $_regionLabel ($_chosenLocale)'
+                        : 'Powered by Gemini 2.0 • Online',
                     style: TextStyle(
                       fontSize: 12,
                       color: AppTheme.primaryGreen,
@@ -382,6 +663,38 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         actions: [
+          // TTS control button
+          Container(
+            margin: const EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  _isSpeaking
+                      ? Colors.red.withOpacity(0.1)
+                      : AppTheme.primaryBlue.withOpacity(0.1),
+                  _isSpeaking
+                      ? Colors.red.withOpacity(0.05)
+                      : AppTheme.secondaryBlue.withOpacity(0.05),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: _isSpeaking
+                    ? Colors.red.withOpacity(0.3)
+                    : AppTheme.primaryBlue.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: IconButton(
+              icon: Icon(
+                _isSpeaking ? Icons.volume_off : Icons.volume_up,
+                color: _isSpeaking ? Colors.red : AppTheme.primaryBlue,
+                size: 20,
+              ),
+              onPressed: _isSpeaking ? _stopSpeaking : null,
+              tooltip: _isSpeaking ? 'Stop reading' : 'Voice reading enabled',
+            ),
+          ),
           Container(
             margin: const EdgeInsets.only(right: 12),
             decoration: BoxDecoration(
@@ -517,8 +830,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         'Take a photo to analyze',
                       ),
                       _buildSuggestionChip(
-                        '💧 Irrigation',
-                        'Water management tips',
+                        '🎤 Voice input',
+                        'Try voice input by tapping the microphone',
                       ),
                     ],
                   ),
@@ -703,6 +1016,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 // Input row
                 Row(
                   children: [
+                    // Camera button
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -726,7 +1040,55 @@ class _ChatScreenState extends State<ChatScreen> {
                         tooltip: 'Add crop photo for analysis',
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
+
+                    // Microphone button
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: _isListening
+                              ? [
+                                  Colors.red.withOpacity(0.2),
+                                  Colors.red.withOpacity(0.1),
+                                ]
+                              : [
+                                  AppTheme.primaryBlue.withOpacity(0.1),
+                                  AppTheme.secondaryBlue.withOpacity(0.05),
+                                ],
+                        ),
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(
+                          color: _isListening
+                              ? Colors.red.withOpacity(0.4)
+                              : AppTheme.primaryBlue.withOpacity(0.3),
+                          width: _isListening ? 2 : 1,
+                        ),
+                        boxShadow: _isListening
+                            ? [
+                                BoxShadow(
+                                  color: Colors.red.withOpacity(0.2),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ]
+                            : [],
+                      ),
+                      child: IconButton(
+                        onPressed: _speechEnabled ? _toggleListening : null,
+                        icon: Icon(
+                          _isListening ? Icons.mic : Icons.mic_none,
+                          color: _isListening
+                              ? Colors.red
+                              : (_speechEnabled
+                                    ? AppTheme.primaryBlue
+                                    : Colors.grey),
+                        ),
+                        tooltip: _isListening
+                            ? 'Stop voice input'
+                            : 'Start voice input',
+                      ),
+                    ),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
@@ -747,11 +1109,17 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: TextField(
                           controller: _messageController,
                           decoration: InputDecoration(
-                            hintText:
-                                'Ask me about crops, soil, weather, pests...',
+                            hintText: _isListening
+                                ? 'Listening... Speak your farming question'
+                                : 'Ask me about crops, soil, weather, pests...',
                             hintStyle: TextStyle(
-                              color: Colors.grey[500],
+                              color: _isListening
+                                  ? Colors.red[400]
+                                  : Colors.grey[500],
                               fontSize: 16,
+                              fontStyle: _isListening
+                                  ? FontStyle.italic
+                                  : FontStyle.normal,
                             ),
                             border: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -764,15 +1132,34 @@ class _ChatScreenState extends State<ChatScreen> {
                             prefixIcon: Container(
                               margin: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: AppTheme.primaryGreen.withOpacity(0.1),
+                                color: _isListening
+                                    ? Colors.red.withOpacity(0.1)
+                                    : AppTheme.primaryGreen.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Icon(
-                                Icons.chat_bubble_outline,
-                                color: AppTheme.primaryGreen,
+                                _isListening
+                                    ? Icons.mic
+                                    : Icons.chat_bubble_outline,
+                                color: _isListening
+                                    ? Colors.red
+                                    : AppTheme.primaryGreen,
                                 size: 20,
                               ),
                             ),
+                            suffixIcon: _isListening
+                                ? Container(
+                                    margin: const EdgeInsets.all(8),
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.red,
+                                      ),
+                                    ),
+                                  )
+                                : null,
                           ),
                           style: const TextStyle(
                             color: Colors.black87,
@@ -942,16 +1329,52 @@ class _ChatScreenState extends State<ChatScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.grey[500],
-                        fontWeight: FontWeight.w500,
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[500],
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        if (message.isUser) ...[
+                          const SizedBox(width: 6),
+                          Icon(
+                            Icons.done_all,
+                            size: 14,
+                            color: AppTheme.primaryGreen,
+                          ),
+                        ],
+                        // Add speaker button for AI messages
+                        if (!message.isUser && _ttsEnabled && _localeReady) ...[
+                          const SizedBox(width: 8),
+                          GestureDetector(
+                            onTap: () => _speakText(message.text),
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                color: AppTheme.primaryBlue.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: AppTheme.primaryBlue.withOpacity(0.3),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.volume_up,
+                                size: 14,
+                                color: AppTheme.primaryBlue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ),
                 ],
