@@ -486,7 +486,7 @@ class _ChatScreenState extends State<ChatScreen> {
       _tts = FlutterTts();
       await _tts.setLanguage(_chosenBcp47);
       await _tts.setSpeechRate(
-        0.4,
+        0.25,
       ); // Much slower speech rate for better comprehension
       await _tts.setPitch(1.0);
       _ttsEnabled = true;
