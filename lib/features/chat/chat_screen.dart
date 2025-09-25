@@ -326,81 +326,336 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FFFE),
       appBar: AppBar(
-        title: const Text('AI Chat Assistant'),
-        backgroundColor: AppTheme.primaryGreen,
-        foregroundColor: Colors.white,
+        elevation: 4,
+        shadowColor: AppTheme.primaryGreen.withOpacity(0.2),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        title: Row(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppTheme.primaryGreen, AppTheme.secondaryGreen],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(21),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.primaryGreen.withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.eco, color: Colors.white, size: 22),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Agrow AI Assistant',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  Text(
+                    'Powered by Gemini 2.0 • Online',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppTheme.primaryGreen,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.auto_awesome),
-            onPressed: _showApiKeyDialog,
-            tooltip: 'Gemini 2.0 Info',
+          Container(
+            margin: const EdgeInsets.only(right: 12),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppTheme.primaryGreen.withOpacity(0.1),
+                  AppTheme.secondaryGreen.withOpacity(0.05),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(
+                color: AppTheme.primaryGreen.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: IconButton(
+              icon: const Icon(
+                Icons.settings,
+                color: AppTheme.primaryGreen,
+                size: 20,
+              ),
+              onPressed: _showApiKeyDialog,
+              tooltip: 'Settings & Info',
+            ),
           ),
         ],
       ),
       body: Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final message = _messages[index];
-                return _buildMessageBubble(message);
-              },
+          // Welcome header (shows only when no messages)
+          if (_messages.isEmpty)
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(32),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.primaryGreen.withOpacity(0.08),
+                    AppTheme.secondaryGreen.withOpacity(0.03),
+                    Colors.white,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.primaryGreen.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          AppTheme.primaryGreen,
+                          AppTheme.secondaryGreen,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.primaryGreen.withOpacity(0.3),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(Icons.eco, size: 48, color: Colors.white),
+                  ),
+                  const SizedBox(height: 24),
+                  const Text(
+                    'Welcome to Agrow AI Assistant!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                      letterSpacing: -0.5,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Your intelligent farming companion powered by AI. Get expert advice on crops, soil health, weather insights, pest management, and more.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                      height: 1.5,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 28),
+                  const Text(
+                    'Quick Start:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      _buildSuggestionChip(
+                        '🌾 Crop diseases',
+                        'What are common wheat diseases?',
+                      ),
+                      _buildSuggestionChip(
+                        '🌱 Soil health',
+                        'How to improve soil fertility?',
+                      ),
+                      _buildSuggestionChip(
+                        '🌦️ Weather advice',
+                        'Best planting time for corn?',
+                      ),
+                      _buildSuggestionChip(
+                        '🐛 Pest control',
+                        'Natural pest control methods',
+                      ),
+                      _buildSuggestionChip(
+                        '📸 Photo analysis',
+                        'Take a photo to analyze',
+                      ),
+                      _buildSuggestionChip(
+                        '💧 Irrigation',
+                        'Water management tips',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
+
+          // Chat messages
+          Expanded(
+            child: _messages.isEmpty
+                ? const SizedBox.shrink()
+                : Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, -2),
+                        ),
+                      ],
+                    ),
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 24,
+                      ),
+                      itemCount: _messages.length,
+                      itemBuilder: (context, index) {
+                        final message = _messages[index];
+                        return _buildMessageBubble(message);
+                      },
+                    ),
+                  ),
           ),
+          // Typing indicator
           if (_isTyping)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
+              ),
               child: Row(
                 children: [
-                  const CircleAvatar(
-                    radius: 16,
-                    backgroundColor: AppTheme.primaryGreen,
-                    child: Icon(Icons.smart_toy, color: Colors.white, size: 16),
-                  ),
-                  const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
+                    width: 42,
+                    height: 42,
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(18),
+                      gradient: LinearGradient(
+                        colors: [
+                          AppTheme.primaryGreen,
+                          AppTheme.secondaryGreen,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(21),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.primaryGreen.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          width: 12,
-                          height: 12,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              AppTheme.primaryGreen,
+                    child: const Icon(Icons.eco, color: Colors.white, size: 22),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 14,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.grey[50]!, Colors.grey[100]!],
+                        ),
+                        borderRadius: BorderRadius.circular(22),
+                        border: Border.all(
+                          color: AppTheme.primaryGreen.withOpacity(0.1),
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                AppTheme.primaryGreen,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 8),
-                        Text('AI is thinking...'),
-                      ],
+                          const SizedBox(width: 12),
+                          Text(
+                            'AI is analyzing and preparing response...',
+                            style: TextStyle(
+                              color: AppTheme.primaryGreen,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border(top: BorderSide(color: Colors.grey[300]!)),
+              border: Border(
+                top: BorderSide(color: Colors.grey[200]!, width: 1),
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 4,
-                  offset: const Offset(0, -2),
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 12,
+                  offset: const Offset(0, -4),
                 ),
               ],
             ),
@@ -450,8 +705,17 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryGreen.withOpacity(0.1),
+                        gradient: LinearGradient(
+                          colors: [
+                            AppTheme.primaryGreen.withOpacity(0.1),
+                            AppTheme.secondaryGreen.withOpacity(0.05),
+                          ],
+                        ),
                         borderRadius: BorderRadius.circular(25),
+                        border: Border.all(
+                          color: AppTheme.primaryGreen.withOpacity(0.3),
+                          width: 1,
+                        ),
                       ),
                       child: IconButton(
                         onPressed: _showImageSourceDialog,
@@ -459,41 +723,34 @@ class _ChatScreenState extends State<ChatScreen> {
                           Icons.camera_alt,
                           color: AppTheme.primaryGreen,
                         ),
-                        tooltip: 'Add photo',
+                        tooltip: 'Add crop photo for analysis',
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 0, 0, 0),
+                          color: Colors.grey[50],
                           borderRadius: BorderRadius.circular(25),
                           border: Border.all(
-                            color: Colors.grey[400]!,
-                            width: 1.5,
+                            color: AppTheme.primaryGreen.withOpacity(0.3),
+                            width: 2,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 3,
-                              offset: const Offset(0, 1),
+                              color: AppTheme.primaryGreen.withOpacity(0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
                             ),
                           ],
                         ),
                         child: TextField(
                           controller: _messageController,
-                          onTap: () {
-                            // Add visual feedback on tap
-                            if (mounted) {
-                              setState(() {
-                                // Force rebuild to show focus state
-                              });
-                            }
-                          },
                           decoration: InputDecoration(
-                            hintText: 'Type your farming question here...',
+                            hintText:
+                                'Ask me about crops, soil, weather, pests...',
                             hintStyle: TextStyle(
-                              color: const Color.fromARGB(255, 234, 234, 234),
+                              color: Colors.grey[500],
                               fontSize: 16,
                             ),
                             border: InputBorder.none,
@@ -504,15 +761,28 @@ class _ChatScreenState extends State<ChatScreen> {
                               horizontal: 20,
                               vertical: 15,
                             ),
+                            prefixIcon: Container(
+                              margin: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppTheme.primaryGreen.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Icon(
+                                Icons.chat_bubble_outline,
+                                color: AppTheme.primaryGreen,
+                                size: 20,
+                              ),
+                            ),
                           ),
                           style: const TextStyle(
-                            color: Colors.black,
+                            color: Colors.black87,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
                           cursorColor: AppTheme.primaryGreen,
                           cursorWidth: 2,
-                          maxLines: null,
+                          maxLines: 4,
+                          minLines: 1,
                           textInputAction: TextInputAction.send,
                           onSubmitted: (_) => _sendMessage(),
                         ),
@@ -521,12 +791,29 @@ class _ChatScreenState extends State<ChatScreen> {
                     const SizedBox(width: 8),
                     Container(
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryGreen,
+                        gradient: LinearGradient(
+                          colors: [
+                            AppTheme.primaryGreen,
+                            AppTheme.secondaryGreen,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
                         borderRadius: BorderRadius.circular(25),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.primaryGreen.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
                       child: IconButton(
                         onPressed: _sendMessage,
-                        icon: const Icon(Icons.send, color: Colors.white),
+                        icon: const Icon(
+                          Icons.send_rounded,
+                          color: Colors.white,
+                        ),
                         tooltip: 'Send message',
                       ),
                     ),
@@ -542,69 +829,200 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildMessageBubble(ChatMessage message) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: 24),
       child: Row(
         mainAxisAlignment: message.isUser
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (!message.isUser)
-            const CircleAvatar(
-              backgroundColor: AppTheme.primaryGreen,
-              child: Icon(Icons.smart_toy, color: Colors.white),
+          if (!message.isUser) ...[
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppTheme.primaryGreen, AppTheme.secondaryGreen],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(21),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.primaryGreen.withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.eco, color: Colors.white, size: 22),
             ),
-          if (!message.isUser) const SizedBox(width: 8),
+            const SizedBox(width: 16),
+          ],
           Flexible(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: message.isUser ? AppTheme.primaryBlue : Colors.grey[200],
-                borderRadius: BorderRadius.circular(18),
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.78,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: message.isUser
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
                 children: [
-                  // Display image if available
-                  if (message.imageFile != null)
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.file(
-                          message.imageFile!,
-                          width: 200,
-                          height: 150,
-                          fit: BoxFit.cover,
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: message.isUser
+                          ? LinearGradient(
+                              colors: [
+                                AppTheme.primaryGreen,
+                                AppTheme.secondaryGreen,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            )
+                          : LinearGradient(
+                              colors: [Colors.white, Colors.grey[50]!],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                      borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(22),
+                        topRight: const Radius.circular(22),
+                        bottomLeft: Radius.circular(message.isUser ? 22 : 6),
+                        bottomRight: Radius.circular(message.isUser ? 6 : 22),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: message.isUser
+                              ? AppTheme.primaryGreen.withOpacity(0.3)
+                              : Colors.black.withOpacity(0.1),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
                         ),
-                      ),
+                      ],
+                      border: message.isUser
+                          ? null
+                          : Border.all(color: Colors.grey[200]!, width: 1),
                     ),
-                  // Display text
-                  if (message.text.isNotEmpty)
-                    Text(
-                      message.text,
-                      style: TextStyle(
-                        color: message.isUser ? Colors.white : Colors.black87,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Display image if available
+                        if (message.imageFile != null) ...[
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.file(
+                                message.imageFile!,
+                                width: 200,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                        // Display text
+                        if (message.text.isNotEmpty)
+                          Text(
+                            message.text,
+                            style: TextStyle(
+                              color: message.isUser
+                                  ? Colors.white
+                                  : Colors.black87,
+                              fontSize: 16,
+                              height: 1.5,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                      ],
                     ),
+                  ),
                   const SizedBox(height: 4),
-                  Text(
-                    '${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: message.isUser ? Colors.white70 : Colors.grey[600],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      '${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey[500],
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          if (message.isUser) const SizedBox(width: 8),
-          if (message.isUser)
-            const CircleAvatar(
-              backgroundColor: AppTheme.primaryBlue,
-              child: Icon(Icons.person, color: Colors.white),
+          if (message.isUser) ...[
+            const SizedBox(width: 16),
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppTheme.primaryBlue, AppTheme.secondaryBlue],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(21),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.primaryBlue.withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.person, color: Colors.white, size: 22),
             ),
+          ],
         ],
+      ),
+    );
+  }
+
+  Widget _buildSuggestionChip(String text, [String? fullMessage]) {
+    return GestureDetector(
+      onTap: () {
+        _messageController.text =
+            fullMessage ?? text.replaceAll(RegExp(r'[🌾🌱🌦️🐛📸💧]\s*'), '');
+        _sendMessage();
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white, AppTheme.primaryGreen.withOpacity(0.05)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(
+            color: AppTheme.primaryGreen.withOpacity(0.3),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppTheme.primaryGreen.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: AppTheme.primaryGreen,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }
