@@ -153,7 +153,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
           'parts': [
             {
               'text':
-                  'You are an expert agricultural AI assistant. Analyze this plant image for diseases, pests, or health issues. Provide:\n1. Diagnosis (specific condition name)\n2. Type (Healthy/Disease/Pest/Nutrient Deficiency)\n3. Confidence level (0-1)\n4. Detailed description\n5. List of specific treatment recommendations\n\nFormat your response as JSON with these exact keys: condition, type, confidence, description, treatments (array of strings)',
+                  'You are an expert agricultural AI assistant. Analyze this plant image for diseases, pests, or health issues. Provide:\n1. Diagnosis (specific condition name)\n2. Type (Healthy/Disease/Pest/Nutrient Deficiency)\n3. Confidence level (0-1)\n4. Detailed description\n5. List of specific treatment recommendations\n6.Also recommmend the fertilzers and pesticided\n\nFormat your response as JSON with these exact keys: condition, type, confidence, description, treatments (array of strings)',
             },
             {
               'inline_data': {'mime_type': 'image/jpeg', 'data': base64Image},
