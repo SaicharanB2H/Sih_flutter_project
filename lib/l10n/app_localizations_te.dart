@@ -242,4 +242,79 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get comingSoon => 'త్వరలో వస్తుంది';
+
+  @override
+  String get enterFarmName => 'మీ వ్యవసాయ పేరును నమోదు చేయండి';
+
+  @override
+  String get enterFarmSize => 'ఎకరాలలో వ్యవసాయ పరిమాణాన్ని నమోదు చేయండి';
+
+  @override
+  String get farmDetailsDescription =>
+      'మీ వ్యవసాయం గురించి మాకు చెప్పండి. మీ స్థానాన్ని ఉపయోగించి మేము నేల రకాన్ని స్వయంచాలకంగా గుర్తిస్తాము.';
+
+  @override
+  String get howToGetBestResults => 'ఉత్తమ ఫలితాలు ఎలా పొందాలి';
+
+  @override
+  String get takeClearWellLitPhotos =>
+      'స్పష్టమైన, బాగా వెలిగించబడిన ఫోటోలు తీయండి';
+
+  @override
+  String get focusOnAffectedAreas => 'బాధిత ప్రాంతాలపై దృష్టి పెట్టండి';
+
+  @override
+  String get includeLeavesStemsFruits => 'ఆకులు, కాండాలు లేదా పండ్లను చేర్చండి';
+
+  @override
+  String get avoidBlurryDarkImages =>
+      'మసకబారిన లేదా చీకటి చిత్రాలను నివారించండి';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'గత విశ్లేషణలు లేవు\nమీ మొదటి మొక్క ఫోటోను తీయండి!';
+
+  @override
+  String get cropsSelected => 'పంటలు ఎంపిక చేయబడ్డాయి';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop => 'దయచేసి కనీసం ఒక పంటను ఎంపిక చేయండి';
+
+  @override
+  String get rice => 'బియ్యం';
+
+  @override
+  String get wheat => 'గోధుమ';
+
+  @override
+  String get corn => 'మొక్కజొన్న';
+
+  @override
+  String get tomato => 'టమాటా';
+
+  @override
+  String get potato => 'ఉల్లిగడ్డ';
+
+  @override
+  String get onion => 'వెంకాయ';
+
+  @override
+  String get cotton => 'పత్తి';
+
+  @override
+  String get sugarcane => 'చెరకు';
+
+  @override
+  String get soybean => 'సోయాబీన్';
+
+  @override
+  String get millet => 'సజ్జలు';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'మీ నిర్దిష్ట పంటలు మరియు వ్యవసాయ పరిస్థితుల కోసం ఉత్తమ సిఫార్సులను అందించడానికి మీ స్థానం ఆధారంగా మేము మీ నేల రకాన్ని స్వయంచాలకంగా గుర్తిస్తాము.';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'మీ నిర్దిష్ట పంటలు మరియు వ్యవసాయ పరిస్థితుల కోసం ఉత్తమ సిఫార్సులను అందించడానికి మీ స్థానం ఆధారంగా మేము మీ నేల రకాన్ని స్వయంచాలకంగా గుర్తిస్తాము.';
 }

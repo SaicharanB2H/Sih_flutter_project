@@ -242,4 +242,77 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get comingSoon => 'लवकरच येत आहे';
+
+  @override
+  String get enterFarmName => 'तुमच्या शेताचे नाव प्रविष्ट करा';
+
+  @override
+  String get enterFarmSize => 'एकरमध्ये शेताचा आकार प्रविष्ट करा';
+
+  @override
+  String get farmDetailsDescription =>
+      'आम्हाला तुमच्या शेताबद्दल सांगा. आम्ही तुमचे स्थान वापरून मातीचा प्रकार स्वयंचलितपणे शोधू शकू.';
+
+  @override
+  String get howToGetBestResults => 'सर्वोत्तम परिणाम कसे मिळवायचे';
+
+  @override
+  String get takeClearWellLitPhotos => 'स्पष्ट, चांगल्या प्रकाशातील फोटो घ्या';
+
+  @override
+  String get focusOnAffectedAreas => 'प्रभावित भागांवर लक्ष केंद्रित करा';
+
+  @override
+  String get includeLeavesStemsFruits => 'पाने, पाटे किंवा फळे समाविष्ट करा';
+
+  @override
+  String get avoidBlurryDarkImages => 'अस्पष्ट किंवा गडद प्रतिमा टाळा';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'मागील निदाने नाहीत\nतुमचा पहिला वनस्पती फोटो घ्या!';
+
+  @override
+  String get cropsSelected => 'पिके निवडली';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop => 'कृपया किमान एक पिक निवडा';
+
+  @override
+  String get rice => 'तांदूळ';
+
+  @override
+  String get wheat => 'गहू';
+
+  @override
+  String get corn => 'मका';
+
+  @override
+  String get tomato => 'टोमॅटो';
+
+  @override
+  String get potato => 'बटाटा';
+
+  @override
+  String get onion => 'कांदा';
+
+  @override
+  String get cotton => 'रुई';
+
+  @override
+  String get sugarcane => 'ऊस';
+
+  @override
+  String get soybean => 'सोयाबीन';
+
+  @override
+  String get millet => 'बाजरी';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'तुमच्या निर्दिष्ट पिकांसाठी आणि शेतीच्या परिस्थितींसाठी उत्तम शिफारसी देण्यासाठी आम्ही तुमच्या स्थानाच्या आधारावर तुमच्या मातीच्या प्रकाराची स्वयंचलितपणे ओळख करू.';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'तुमच्या निर्दिष्ट पिकांसाठी आणि शेतीच्या परिस्थितींसाठी उत्तम शिफारसी देण्यासाठी आम्ही तुमच्या स्थानाच्या आधारावर तुमच्या मातीच्या प्रकाराची स्वयंचलितपणे ओळख करू.';
 }

@@ -242,4 +242,81 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get comingSoon => 'ಶೀಘ್ರದಲ್ಲೇ ಬರುತ್ತಿದೆ';
+
+  @override
+  String get enterFarmName => 'ನಿಮ್ಮ ತೋಟದ ಹೆಸರನ್ನು ನಮೂದಿಸಿ';
+
+  @override
+  String get enterFarmSize => 'ಏಕರಗಳಲ್ಲಿ ತೋಟದ ಗಾತ್ರವನ್ನು ನಮೂದಿಸಿ';
+
+  @override
+  String get farmDetailsDescription =>
+      'ನಿಮ್ಮ ತೋಟದ ಬಗ್ಗೆ ನಮಗೆ ಹೇಳಿ. ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಬಳಸಿಕೊಂಡು ನಾವು ಮಣ್ಣಿನ ಪ್ರಕಾರವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಗುರುತಿಸುತ್ತೇವೆ.';
+
+  @override
+  String get howToGetBestResults => 'ಅತ್ಯುತ್ತಮ ಫಲಿತಾಂಶಗಳನ್ನು ಹೇಗೆ ಪಡೆಯುವುದು';
+
+  @override
+  String get takeClearWellLitPhotos =>
+      'ಸ್ಪಷ್ಟವಾದ, ಚೆನ್ನಾಗಿ ಬೆಳಗಿಸಿದ ಫೋಟೋಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ';
+
+  @override
+  String get focusOnAffectedAreas => 'ಪ್ರಭಾವಿತವಾದ ಪ್ರದೇಶಗಳ ಮೇಲೆ ಗಮನ ಹರಿಸಿ';
+
+  @override
+  String get includeLeavesStemsFruits =>
+      'ಎಲೆಗಳು, ಕಾಂಡಗಳು ಅಥವಾ ಹಣ್ಣುಗಳನ್ನು ಸೇರಿಸಿ';
+
+  @override
+  String get avoidBlurryDarkImages =>
+      'ಅಸ್ಪಷ್ಟ ಅಥವಾ ಕತ್ತಲಾದ ಚಿತ್ರಗಳನ್ನು ತಪ್ಪಿಸಿ';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'ಹಿಂದಿನ ಯಾವುದೇ ನಿದಾನಗಳಿಲ್ಲ\nನಿಮ್ಮ ಮೊದಲ ಸಸ್ಯದ ಫೋಟೋವನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ!';
+
+  @override
+  String get cropsSelected => 'ಬೆಳೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop =>
+      'ದಯವಿಟ್ಟು ಕನಿಷ್ಠ ಒಂದು ಬೆಳೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ';
+
+  @override
+  String get rice => 'ಅಕ್ಕಿ';
+
+  @override
+  String get wheat => 'ಗೋಧಿ';
+
+  @override
+  String get corn => 'ಜೋಳ';
+
+  @override
+  String get tomato => 'ಟೊಮ್ಯಾಟೊ';
+
+  @override
+  String get potato => 'ಆಲೂಗಡ್ಡೆ';
+
+  @override
+  String get onion => 'ಇರುಳ್ಳಿ';
+
+  @override
+  String get cotton => 'ಹತ್ತಿ';
+
+  @override
+  String get sugarcane => 'ಕುಬ್ಬುಸಕ್ಕರೆ';
+
+  @override
+  String get soybean => 'ಸೋಯಾಬೀನ್';
+
+  @override
+  String get millet => 'ರಾಗಿ';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಬೆಳೆಗಳು ಮತ್ತು ಕೃಷಿ ಪರಿಸ್ಥಿತಿಗಳಿಗೆ ಉತ್ತಮ ಶಿಫಾರಸುಗಳನ್ನು ನೀಡಲು ನಾವು ನಿಮ್ಮ ಸ್ಥಳದ ಆಧಾರದ ಮೇಲೆ ನಿಮ್ಮ ಮಣ್ಣಿನ ಪ್ರಕಾರವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಗುರುತಿಸುತ್ತೇವೆ.';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಬೆಳೆಗಳು ಮತ್ತು ಕೃಷಿ ಪರಿಸ್ಥಿತಿಗಳಿಗೆ ಉತ್ತಮ ಶಿಫಾರಸುಗಳನ್ನು ನೀಡಲು ನಾವು ನಿಮ್ಮ ಸ್ಥಳದ ಆಧಾರದ ಮೇಲೆ ನಿಮ್ಮ ಮಣ್ಣಿನ ಪ್ರಕಾರವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಗುರುತಿಸುತ್ತೇವೆ.';
 }

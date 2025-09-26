@@ -242,4 +242,81 @@ class AppLocalizationsOr extends AppLocalizations {
 
   @override
   String get comingSoon => 'ଶୀଘ୍ର ଆସୁଛି';
+
+  @override
+  String get enterFarmName => 'ଆପଣଙ୍କର ଖେତର ନାମ ପ୍ରବେଶ କରନ୍ତୁ';
+
+  @override
+  String get enterFarmSize => 'ଏକରରେ ଖେତର ଆକାର ପ୍ରବେଶ କରନ୍ତୁ';
+
+  @override
+  String get farmDetailsDescription =>
+      'ଆମକୁ ଆପଣଙ୍କର ଖେତ ବିଷୟରେ କୁହନ୍ତୁ। ଆମେ ଆପଣଙ୍କର ଅବସ୍ଥିତି ଉପଯୋଗ କରି ମାଟିର ପ୍ରକାର ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚିହ୍ନଟ କରିବୁ।';
+
+  @override
+  String get howToGetBestResults => 'ସର୍ବୋତ୍ତମ ଫଳାଫଳ କିପରି ପାଇପାରିବେ';
+
+  @override
+  String get takeClearWellLitPhotos => 'ସ୍ପଷ୍ଟ, ଭଲ ଆଲୋକିତ ଫୋଟୋ ନିଅନ୍ତୁ';
+
+  @override
+  String get focusOnAffectedAreas =>
+      'ପ୍ରଭାବିତ ଅଞ୍ଚଳଗୁଡ଼ିକ ଉପରେ ଧ୍ୟାନ କେନ୍ଦ୍ରିତ କରନ୍ତୁ';
+
+  @override
+  String get includeLeavesStemsFruits =>
+      'ପତ୍ର, ଡାଣ୍ଡ କିମ୍ବା ଫଳଗୁଡ଼ିକ ଅନ୍ତର୍ଭୁକ୍ତ କରନ୍ତୁ';
+
+  @override
+  String get avoidBlurryDarkImages =>
+      'ଅସ୍ପଷ୍ଟ କିମ୍ବା ଅନ୍ଧାର ଛବିଗୁଡ଼ିକୁ ପରିହାର କରନ୍ତୁ';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'କୌଣସି ପୂର୍ବ ନିଦାନ ନାହିଁ\nଆପଣଙ୍କର ପ୍ରଥମ ଉଦ୍ଭିଦ ଫୋଟୋ ନିଅନ୍ତୁ!';
+
+  @override
+  String get cropsSelected => 'ଫସଲଗୁଡ଼ିକ ଚୟନ କରାଯାଇଛି';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop =>
+      'ଦୟାକରି କମରେ କମ ଗୋଟିଏ ଫସଲ ଚୟନ କରନ୍ତୁ';
+
+  @override
+  String get rice => 'ଚାଉଳ';
+
+  @override
+  String get wheat => 'ଗହମ';
+
+  @override
+  String get corn => 'ଭୁଟ୍ଟା';
+
+  @override
+  String get tomato => 'ଟମାଟୋ';
+
+  @override
+  String get potato => 'ଆଲୁ';
+
+  @override
+  String get onion => 'ପିଆଜ';
+
+  @override
+  String get cotton => 'ତୁଳା';
+
+  @override
+  String get sugarcane => 'ଗୁଡ଼ା';
+
+  @override
+  String get soybean => 'ସୋୟାବୀନ୍';
+
+  @override
+  String get millet => 'ବାଜରା';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'ଆପଣଙ୍କର ନିର୍ଦ୍ଦିଷ୍ଟ ଫସଲ ଏବଂ କୃଷି ଅବସ୍ଥାଗୁଡ଼ିକ ପାଇଁ ଉତ୍ତମ ପରାମର୍ଶ ପ୍ରଦାନ କରିବା ପାଇଁ ଆମେ ଆପଣଙ୍କର ଅବସ୍ଥିତି ଉପରେ ଆଧାର କରି ଆପଣଙ୍କର ମାଟିର ପ୍ରକାରକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚିହ୍ନଟ କରିବୁ।';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'ଆପଣଙ୍କର ନିର୍ଦ୍ଦିଷ୍ଟ ଫସଲ ଏବଂ କୃଷି ଅବସ୍ଥାଗୁଡ଼ିକ ପାଇଁ ଉତ୍ତମ ପରାମର୍ଶ ପ୍ରଦାନ କରିବା ପାଇଁ ଆମେ ଆପଣଙ୍କର ଅବସ୍ଥିତି ଉପରେ ଆଧାର କରି ଆପଣଙ୍କର ମାଟିର ପ୍ରକାରକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚିହ୍ନଟ କରିବୁ।';
 }

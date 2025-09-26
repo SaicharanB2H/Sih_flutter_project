@@ -242,4 +242,77 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String get comingSoon => 'শীঘ্ৰেই আহিছে';
+
+  @override
+  String get enterFarmName => 'আপোনাৰ খেতিৰ নাম লিখক';
+
+  @override
+  String get enterFarmSize => 'একৰত খেতিৰ আকাৰ লিখক';
+
+  @override
+  String get farmDetailsDescription =>
+      'আমাক আপোনাৰ খেতিৰ বিষয়ে কওক। আমি আপোনাৰ অৱস্থান ব্যৱহাৰ কৰি মাটিৰ ধৰণ স্বয়ংক্ৰিয়ভাৱে চিনাক্ত কৰিম।';
+
+  @override
+  String get howToGetBestResults => 'সৰ্বোত্তম ফলাফল কেনেকৈ লাভ কৰা যায়';
+
+  @override
+  String get takeClearWellLitPhotos => 'স্পষ্ট, ভালদৰে আলোকিত ছবি লওক';
+
+  @override
+  String get focusOnAffectedAreas => 'প্ৰভাৱিত অঞ্চলসমূহত মনোযোগ দিয়ক';
+
+  @override
+  String get includeLeavesStemsFruits => 'পাত, ডাঙৰ বা ফল অন্তৰ্ভুক্ত কৰক';
+
+  @override
+  String get avoidBlurryDarkImages => 'অস্পষ্ট বা অন্ধকাৰ ছবি এৰি দিয়ক';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'কোনো পূৰ্বৱৰ্তী নিৰ্ণয় নাই\nআপোনাৰ প্ৰথম উদ্ভিদৰ ছবি লওক!';
+
+  @override
+  String get cropsSelected => 'ফসলসমূহ বাছনি কৰা হৈছে';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop => 'অনুগ্ৰহ কৰি কমেও এটা ফসল বাছনি কৰক';
+
+  @override
+  String get rice => 'ধান';
+
+  @override
+  String get wheat => 'গম';
+
+  @override
+  String get corn => 'ভুট্টা';
+
+  @override
+  String get tomato => 'টমেটো';
+
+  @override
+  String get potato => 'আলু';
+
+  @override
+  String get onion => 'পিয়াজ';
+
+  @override
+  String get cotton => 'তুলা';
+
+  @override
+  String get sugarcane => 'চেনাগুৰ';
+
+  @override
+  String get soybean => 'সোয়াবিন';
+
+  @override
+  String get millet => 'বাজৰা';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'আপোনাৰ নিৰ্দিষ্ট ফসল আৰু কৃষিৰ অৱস্থাৰ বাবে উন্নত পৰামৰ্শ প্ৰদান কৰিবলৈ আমি আপোনাৰ অৱস্থানৰ ওপৰত ভিত্তি কৰি আপোনাৰ মাটিৰ ধৰণ স্বয়ংক্ৰিয়ভাৱে চিনাক্ত কৰিম।';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'আপোনাৰ নিৰ্দিষ্ট ফসল আৰু কৃষিৰ অৱস্থাৰ বাবে উন্নত পৰামৰ্শ প্ৰদান কৰিবলৈ আমি আপোনাৰ অৱস্থানৰ ওপৰত ভিত্তি কৰি আপোনাৰ মাটিৰ ধৰণ স্বয়ংক্ৰিয়ভাৱে চিনাক্ত কৰিম।';
 }

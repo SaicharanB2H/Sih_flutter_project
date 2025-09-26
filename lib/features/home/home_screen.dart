@@ -9,6 +9,7 @@ import '../../features/weather/working_weather_screen.dart';
 import '../../features/soil/soil_detection_screen.dart';
 import '../../features/market/market_prices_dialog.dart';
 import '../../features/settings/language_settings_screen.dart';
+import '../../features/auth/mobile_sign_in_screen.dart';
 import '../../l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,12 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
         return await showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text('Exit App'),
-                content: const Text('Do you want to exit Agrow?'),
+                title: Text(AppLocalizations.of(context)!.appTitle),
+                content: const Text('Do you want to exit the app?'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(false),
-                    child: const Text('Cancel'),
+                    child: Text(AppLocalizations.of(context)!.cancel),
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(true),
@@ -61,27 +62,41 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Scaffold(
         body: screens[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+        bottomNavigationBar: Builder(
+          builder: (context) {
+            final localizations = AppLocalizations.of(context)!;
+            return BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _selectedIndex,
+              onTap: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              items: [
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.dashboard),
+                  label: localizations.dashboard,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.local_hospital),
+                  label: localizations.plantDiagnosis,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.chat),
+                  label: localizations.chat,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.wb_sunny),
+                  label: localizations.weather,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.person),
+                  label: localizations.profile,
+                ),
+              ],
+            );
           },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Home'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.local_hospital),
-              label: 'Diagnosis',
-            ),
-            BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.wb_sunny),
-              label: 'Weather',
-            ),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ],
         ),
       ),
     );
@@ -131,7 +146,7 @@ class DashboardTab extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Welcome, ${authProvider.user?.name ?? 'Farmer'}!',
+                                '${localizations.welcome}, ${authProvider.user?.name ?? 'Farmer'}!',
                                 style: Theme.of(
                                   context,
                                 ).textTheme.headlineSmall,
@@ -171,8 +186,8 @@ class DashboardTab extends StatelessWidget {
                 _buildActionCard(
                   context,
                   icon: Icons.camera_alt,
-                  title: 'Plant Diagnosis',
-                  subtitle: 'Scan your crops',
+                  title: localizations.plantDiagnosis,
+                  subtitle: localizations.capturePhoto,
                   color: AppTheme.primaryBlue,
                   onTap: () {
                     // Navigate to diagnosis tab
@@ -182,8 +197,8 @@ class DashboardTab extends StatelessWidget {
                 _buildActionCard(
                   context,
                   icon: Icons.chat,
-                  title: 'Ask AI',
-                  subtitle: 'Get farming advice',
+                  title: localizations.askQuestion,
+                  subtitle: localizations.askAnything,
                   color: AppTheme.primaryGreen,
                   onTap: () {
                     // Navigate to chat tab
@@ -193,8 +208,8 @@ class DashboardTab extends StatelessWidget {
                 _buildActionCard(
                   context,
                   icon: Icons.wb_sunny,
-                  title: 'Weather',
-                  subtitle: 'Check forecast',
+                  title: localizations.weather,
+                  subtitle: localizations.forecast,
                   color: AppTheme.warningOrange,
                   onTap: () {
                     // Navigate to weather tab
@@ -204,8 +219,8 @@ class DashboardTab extends StatelessWidget {
                 _buildActionCard(
                   context,
                   icon: Icons.landscape,
-                  title: 'Soil Analysis',
-                  subtitle: 'Detect soil type',
+                  title: localizations.soilType,
+                  subtitle: localizations.soilType,
                   color: Color(0xFF8B4513),
                   onTap: () {
                     // Navigate to soil detection screen
@@ -220,8 +235,8 @@ class DashboardTab extends StatelessWidget {
                 _buildActionCard(
                   context,
                   icon: Icons.trending_up,
-                  title: 'Market Prices',
-                  subtitle: 'Real-time crop prices',
+                  title: localizations.marketPrices,
+                  subtitle: localizations.marketPrices,
                   color: AppTheme.secondaryGreen,
                   onTap: () {
                     // Show real-time market prices dialog
@@ -254,8 +269,8 @@ class DashboardTab extends StatelessWidget {
                         Icons.info,
                         color: AppTheme.primaryBlue,
                       ),
-                      title: const Text('Welcome to AgriAdvisor AI'),
-                      subtitle: const Text('Start by adding your farm details'),
+                      title: Text('Welcome to AgriAdvisor AI'),
+                      subtitle: Text('Start by adding your farm details'),
                       trailing: Text(
                         'Today',
                         style: Theme.of(context).textTheme.bodySmall,
@@ -279,8 +294,6 @@ class DashboardTab extends StatelessWidget {
     required Color color,
     required VoidCallback onTap,
   }) {
-    final localizations = AppLocalizations.of(context)!;
-
     return Card(
       child: InkWell(
         onTap: onTap,
@@ -293,7 +306,7 @@ class DashboardTab extends StatelessWidget {
               Icon(icon, size: 40, color: color),
               const SizedBox(height: 12),
               Text(
-                _getLocalizedTitle(context, title),
+                title,
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -301,7 +314,7 @@ class DashboardTab extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                _getLocalizedSubtitle(context, subtitle),
+                subtitle,
                 style: Theme.of(
                   context,
                 ).textTheme.bodySmall?.copyWith(color: AppTheme.textSecondary),
@@ -312,46 +325,6 @@ class DashboardTab extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getLocalizedTitle(BuildContext context, String title) {
-    final localizations = AppLocalizations.of(context)!;
-
-    // Map English titles to localized ones
-    switch (title) {
-      case 'Plant Diagnosis':
-        return localizations.plantDiagnosis;
-      case 'Ask AI':
-        return localizations.askQuestion;
-      case 'Weather':
-        return localizations.weather;
-      case 'Soil Analysis':
-        return localizations.soilType;
-      case 'Market Prices':
-        return localizations.marketPrices;
-      default:
-        return title;
-    }
-  }
-
-  String _getLocalizedSubtitle(BuildContext context, String subtitle) {
-    final localizations = AppLocalizations.of(context)!;
-
-    // Map English subtitles to localized ones
-    switch (subtitle) {
-      case 'Scan your crops':
-        return localizations.capturePhoto;
-      case 'Get farming advice':
-        return localizations.askAnything;
-      case 'Check forecast':
-        return localizations.forecast;
-      case 'Detect soil type':
-        return localizations.soilType;
-      case 'Real-time crop prices':
-        return localizations.marketPrices;
-      default:
-        return subtitle;
-    }
   }
 }
 
@@ -485,7 +458,22 @@ class ProfileTab extends StatelessWidget {
                   style: TextStyle(color: AppTheme.errorRed),
                 ),
                 onTap: () async {
+                  final authProvider = Provider.of<SimpleAuthProvider>(
+                    context,
+                    listen: false,
+                  );
                   await authProvider.signOut();
+                  
+                  // Navigate back to sign in screen
+                  if (context.mounted) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MobileSignInScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  }
                 },
               ),
             ],

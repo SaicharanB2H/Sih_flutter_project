@@ -585,6 +585,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Coming Soon'**
   String get comingSoon;
+
+  /// No description provided for @enterFarmName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your farm name'**
+  String get enterFarmName;
+
+  /// No description provided for @enterFarmSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter farm size in acres'**
+  String get enterFarmSize;
+
+  /// No description provided for @farmDetailsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about your farm. We\'ll detect soil type automatically using your location.'**
+  String get farmDetailsDescription;
+
+  /// No description provided for @howToGetBestResults.
+  ///
+  /// In en, this message translates to:
+  /// **'How to get the best results'**
+  String get howToGetBestResults;
+
+  /// No description provided for @takeClearWellLitPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Take clear, well-lit photos'**
+  String get takeClearWellLitPhotos;
+
+  /// No description provided for @focusOnAffectedAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus on affected areas'**
+  String get focusOnAffectedAreas;
+
+  /// No description provided for @includeLeavesStemsFruits.
+  ///
+  /// In en, this message translates to:
+  /// **'Include leaves, stems, or fruits'**
+  String get includeLeavesStemsFruits;
+
+  /// No description provided for @avoidBlurryDarkImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid blurry or dark images'**
+  String get avoidBlurryDarkImages;
+
+  /// No description provided for @noPreviousDiagnoses.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous diagnoses\nTake your first plant photo!'**
+  String get noPreviousDiagnoses;
+
+  /// No description provided for @cropsSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'crops selected'**
+  String get cropsSelected;
+
+  /// No description provided for @pleaseSelectAtLeastOneCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one crop'**
+  String get pleaseSelectAtLeastOneCrop;
+
+  /// No description provided for @rice.
+  ///
+  /// In en, this message translates to:
+  /// **'Rice'**
+  String get rice;
+
+  /// No description provided for @wheat.
+  ///
+  /// In en, this message translates to:
+  /// **'Wheat'**
+  String get wheat;
+
+  /// No description provided for @corn.
+  ///
+  /// In en, this message translates to:
+  /// **'Corn'**
+  String get corn;
+
+  /// No description provided for @tomato.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomato'**
+  String get tomato;
+
+  /// No description provided for @potato.
+  ///
+  /// In en, this message translates to:
+  /// **'Potato'**
+  String get potato;
+
+  /// No description provided for @onion.
+  ///
+  /// In en, this message translates to:
+  /// **'Onion'**
+  String get onion;
+
+  /// No description provided for @cotton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cotton'**
+  String get cotton;
+
+  /// No description provided for @sugarcane.
+  ///
+  /// In en, this message translates to:
+  /// **'Sugarcane'**
+  String get sugarcane;
+
+  /// No description provided for @soybean.
+  ///
+  /// In en, this message translates to:
+  /// **'Soybean'**
+  String get soybean;
+
+  /// No description provided for @millet.
+  ///
+  /// In en, this message translates to:
+  /// **'Millet'**
+  String get millet;
+
+  /// No description provided for @weWillAutomaticallyDetectSoilType.
+  ///
+  /// In en, this message translates to:
+  /// **'We will automatically detect your soil type based on your location to provide better recommendations for your specific crops and farming conditions.'**
+  String get weWillAutomaticallyDetectSoilType;
+
+  /// No description provided for @weWillAutomaticallyDetectSoilTypeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We will automatically detect your soil type based on your location to provide better recommendations for your specific crops and farming conditions.'**
+  String get weWillAutomaticallyDetectSoilTypeTitle;
 }
 
 class _AppLocalizationsDelegate

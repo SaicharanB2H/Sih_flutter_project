@@ -242,4 +242,78 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get comingSoon => 'ટૂંક સમયમાં આવી રહ્યું છે';
+
+  @override
+  String get enterFarmName => 'તમારા ખેતરનું નામ દાખલ કરો';
+
+  @override
+  String get enterFarmSize => 'એકરમાં ખેતરનું કદ દાખલ કરો';
+
+  @override
+  String get farmDetailsDescription =>
+      'અમને તમારા ખેતર વિશે જણાવો. અમે તમારા સ્થાનનો ઉપયોગ કરીને માટીનો પ્રકાર આપમેળે શોધી કાઢીશું.';
+
+  @override
+  String get howToGetBestResults => 'શ્રેષ્ઠ પરિણામો કેવી રીતે મેળવવા';
+
+  @override
+  String get takeClearWellLitPhotos => 'સ્પષ્ટ, સારી રીતે પ્રકાશિત ફોટા લો';
+
+  @override
+  String get focusOnAffectedAreas => 'પ્રભાવિત વિસ્તારો પર ધ્યાન કેન્દ્રિત કરો';
+
+  @override
+  String get includeLeavesStemsFruits => 'પાનખર, ડંડા અથવા ફળો સામેલ કરો';
+
+  @override
+  String get avoidBlurryDarkImages => 'ધુંધળા અથવા અંધારા છબીઓથી બચો';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'કોઈ અગાઉના નિદાન નથી\nતમારો પ્રથમ વનસ્પતિ ફોટો લો!';
+
+  @override
+  String get cropsSelected => 'પાક પસંદ કર્યાં';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop =>
+      'કૃપા કરીને ઓછામાં ઓછા એક પાક પસંદ કરો';
+
+  @override
+  String get rice => 'ચોખા';
+
+  @override
+  String get wheat => 'ગહું';
+
+  @override
+  String get corn => 'મકાઈ';
+
+  @override
+  String get tomato => 'ટમેટા';
+
+  @override
+  String get potato => 'બટાકા';
+
+  @override
+  String get onion => 'દુંગરી';
+
+  @override
+  String get cotton => 'રૂઈ';
+
+  @override
+  String get sugarcane => 'ઊંબર';
+
+  @override
+  String get soybean => 'સોયાબીન';
+
+  @override
+  String get millet => 'બાજરી';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'તમારા ચોક્કસ પાક અને ખેતીની સ્થિતિઓ માટે ઉત્તમ ભલામણો પ્રદાન કરવા માટે અમે તમારા સ્થાનના આધારે તમારા માટીના પ્રકારને સ્વયંચાલિત રૂપે શોધી કાઢીશું.';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'તમારા ચોક્કસ પાક અને ખેતીની સ્થિતિઓ માટે ઉત્તમ ભલામણો પ્રદાન કરવા માટે અમે તમારા સ્થાનના આધારે તમારા માટીના પ્રકારને સ્વયંચાલિત રૂપે શોધી કાઢીશું.';
 }

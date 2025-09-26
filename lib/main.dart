@@ -8,7 +8,7 @@ import 'core/providers/simple_auth_provider.dart';
 import 'core/providers/language_provider.dart';
 import 'core/services/storage_service.dart';
 import 'shared/theme/app_theme.dart';
-import 'features/auth/sign_in_screen.dart';
+import 'features/auth/mobile_sign_in_screen.dart';
 import 'features/onboarding/onboarding_screen.dart';
 import 'features/home/home_screen.dart';
 import 'l10n/app_localizations.dart';
@@ -75,7 +75,7 @@ class AuthWrapper extends StatelessWidget {
           }
           return const HomeScreen();
         } else {
-          return const SignInScreen();
+          return const MobileSignInScreen();
         }
       },
     );

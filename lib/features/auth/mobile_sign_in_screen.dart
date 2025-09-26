@@ -3,79 +3,57 @@ import 'package:provider/provider.dart';
 import '../../core/providers/simple_auth_provider.dart';
 import '../../core/providers/language_provider.dart';
 import '../../shared/theme/app_theme.dart';
-import 'sign_up_screen.dart';
 import '../../l10n/app_localizations.dart';
+import 'otp_verification_screen.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class MobileSignInScreen extends StatefulWidget {
+  const MobileSignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<MobileSignInScreen> createState() => _MobileSignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _MobileSignInScreenState extends State<MobileSignInScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
+  final _phoneController = TextEditingController();
+  String _selectedCountryCode = '+91';
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
-  Future<void> _signIn() async {
+  Future<void> _sendOtp() async {
     if (_formKey.currentState!.validate()) {
       final authProvider = Provider.of<SimpleAuthProvider>(
         context,
         listen: false,
       );
 
-      final success = await authProvider.signIn(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      );
+      final phoneNumber =
+          '${_selectedCountryCode}${_phoneController.text.trim()}';
+
+      final success = await authProvider.sendOtp(phoneNumber: phoneNumber);
 
       if (success && mounted) {
-        // Navigation will be handled by the auth state listener
+        // Navigate to OTP verification screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                OtpVerificationScreen(phoneNumber: phoneNumber),
+          ),
+        );
       } else if (mounted) {
-        _showErrorSnackBar(authProvider.error ?? 'Sign in failed');
+        _showErrorSnackBar(authProvider.error ?? 'Failed to send OTP');
       }
-    }
-  }
-
-  Future<void> _forgotPassword() async {
-    if (_emailController.text.trim().isEmpty) {
-      _showErrorSnackBar('Please enter your email address');
-      return;
-    }
-
-    final authProvider = Provider.of<SimpleAuthProvider>(
-      context,
-      listen: false,
-    );
-    final success = await authProvider.sendPasswordResetEmail(
-      _emailController.text.trim(),
-    );
-
-    if (success && mounted) {
-      _showSuccessSnackBar('Password reset email sent');
-    } else if (mounted) {
-      _showErrorSnackBar(authProvider.error ?? 'Failed to send reset email');
     }
   }
 
   void _showErrorSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message), backgroundColor: AppTheme.errorRed),
-    );
-  }
-
-  void _showSuccessSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), backgroundColor: AppTheme.successGreen),
     );
   }
 
@@ -167,75 +145,69 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     const SizedBox(height: 24),
 
-                    // Email Field
-                    TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: localizations.email,
-                        prefixIcon: const Icon(Icons.email_outlined),
+                    // Phone Number Field
+                    Text(
+                      localizations.phoneNumber,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.textSecondary,
                       ),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return localizations.email;
-                        }
-                        if (!RegExp(
-                          r'^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$',
-                        ).hasMatch(value)) {
-                          return 'Please enter a valid email';
-                        }
-                        return null;
-                      },
+                      textAlign: TextAlign.center,
                     ),
 
                     const SizedBox(height: 16),
 
-                    // Password Field
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: _obscurePassword,
-                      decoration: InputDecoration(
-                        labelText: localizations.password,
-                        prefixIcon: const Icon(Icons.lock_outlined),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscurePassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscurePassword = !_obscurePassword;
-                            });
+                    Row(
+                      children: [
+                        // Country Code Dropdown
+                        DropdownButton<String>(
+                          value: _selectedCountryCode,
+                          items: const [
+                            DropdownMenuItem(value: '+91', child: Text('+91')),
+                            DropdownMenuItem(value: '+1', child: Text('+1')),
+                            DropdownMenuItem(value: '+44', child: Text('+44')),
+                            DropdownMenuItem(value: '+61', child: Text('+61')),
+                            DropdownMenuItem(value: '+81', child: Text('+81')),
+                          ],
+                          onChanged: (value) {
+                            if (value != null) {
+                              setState(() {
+                                _selectedCountryCode = value;
+                              });
+                            }
                           },
                         ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return localizations.password;
-                        }
-                        return null;
-                      },
+                        const SizedBox(width: 8),
+                        // Phone Number Input
+                        Expanded(
+                          child: TextFormField(
+                            controller: _phoneController,
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              labelText: localizations.phoneNumber,
+                              prefixIcon: const Icon(Icons.phone_outlined),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return localizations.phoneNumber;
+                              }
+                              if (value.trim().length < 10) {
+                                return localizations.phoneNumber;
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
                     ),
 
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 32),
 
-                    // Forgot Password
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: authProvider.isLoading
-                            ? null
-                            : _forgotPassword,
-                        child: Text(localizations.forgotPassword),
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    // Sign In Button
+                    // Send OTP Button
                     ElevatedButton(
-                      onPressed: authProvider.isLoading ? null : _signIn,
+                      onPressed: authProvider.isLoading ? null : _sendOtp,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(16),
+                      ),
                       child: authProvider.isLoading
                           ? const SizedBox(
                               height: 20,
@@ -252,26 +224,13 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     const SizedBox(height: 24),
 
-                    // Sign Up Link
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("${localizations.dontHaveAccount} "),
-                        TextButton(
-                          onPressed: authProvider.isLoading
-                              ? null
-                              : () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignUpScreen(),
-                                    ),
-                                  );
-                                },
-                          child: Text(localizations.signUp),
-                        ),
-                      ],
+                    // Terms and Conditions
+                    Text(
+                      'By continuing, you agree to our Terms of Service and Privacy Policy',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppTheme.textSecondary,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),

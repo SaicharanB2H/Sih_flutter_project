@@ -788,7 +788,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Your intelligent farming companion powered by AI. Get expert advice on crops, soil health, weather insights, pest management, and more.',
+                    localizations.welcomeMessage,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[600],

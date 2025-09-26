@@ -126,5 +126,26 @@
   "startVoiceInput": "વોઇસ ઇનપુટ શરૂ કરો",
   "listeningSpeak": "સાંભળી રહ્યા છીએ... તમારો ખેતીનો પ્રશ્ન બોલો",
   "askAnythingAboutFarming": "ખેતી વિશે કશું પૂછો...",
-  "sendMessage": "સંદેશો મોકલો"
+  "sendMessage": "સંદેશો મોકલો",
+  
+  "howToGetBestResults": "શ્રેષ્ઠ પરિણામો કેવી રીતે મેળવવા",
+  "takeClearWellLitPhotos": "સ્પષ્ટ, સારી રીતે પ્રકાશિત ફોટા લો",
+  "focusOnAffectedAreas": "પ્રભાવિત વિસ્તારો પર ધ્યાન કેન્દ્રિત કરો",
+  "includeLeavesStemsFruits": "પાનખર, ડંડા અથવા ફળો સામેલ કરો",
+  "avoidBlurryDarkImages": "ધુંધળા અથવા અંધારા છબીઓથી બચો",
+  "noPreviousDiagnoses": "કોઈ અગાઉના નિદાન નથી\nતમારો પ્રથમ વનસ્પતિ ફોટો લો!",
+  "cropsSelected": "પાક પસંદ કર્યાં",
+  "pleaseSelectAtLeastOneCrop": "કૃપા કરીને ઓછામાં ઓછા એક પાક પસંદ કરો",
+  "rice": "ચોખા",
+  "wheat": "ગહું",
+  "corn": "મકાઈ",
+  "tomato": "ટમેટા",
+  "potato": "બટાકા",
+  "onion": "દુંગરી",
+  "cotton": "રૂઈ",
+  "sugarcane": "ઊંબર",
+  "soybean": "સોયાબીન",
+  "millet": "બાજરી",
+  "weWillAutomaticallyDetectSoilType": "તમારા ચોક્કસ પાક અને ખેતીની સ્થિતિઓ માટે ઉત્તમ ભલામણો પ્રદાન કરવા માટે અમે તમારા સ્થાનના આધારે તમારા માટીના પ્રકારને સ્વયંચાલિત રૂપે શોધી કાઢીશું.",
+  "weWillAutomaticallyDetectSoilTypeTitle": "તમારા ચોક્કસ પાક અને ખેતીની સ્થિતિઓ માટે ઉત્તમ ભલામણો પ્રદાન કરવા માટે અમે તમારા સ્થાનના આધારે તમારા માટીના પ્રકારને સ્વયંચાલિત રૂપે શોધી કાઢીશું."
 }

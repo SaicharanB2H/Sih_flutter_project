@@ -242,4 +242,82 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get comingSoon => 'விரைவில் வருகிறது';
+
+  @override
+  String get enterFarmName => 'உங்கள் பண்ணையின் பெயரை உள்ளிடவும்';
+
+  @override
+  String get enterFarmSize => 'ஏக்கரில் பண்ணை அளவை உள்ளிடவும்';
+
+  @override
+  String get farmDetailsDescription =>
+      'உங்கள் பண்ணை பற்றி எங்களுக்குச் சொல்லுங்கள். உங்கள் இருப்பிடத்தைப் பயன்படுத்தி மண் வகையை தானாகவே கண்டறிவோம்.';
+
+  @override
+  String get howToGetBestResults => 'சிறந்த முடிவுகளை எவ்வாறு பெறுவது';
+
+  @override
+  String get takeClearWellLitPhotos =>
+      'தெளிவான, நல்ல ஒளியுள்ள புகைப்படங்களை எடுக்கவும்';
+
+  @override
+  String get focusOnAffectedAreas =>
+      'பாதிக்கப்பட்ட பகுதிகளில் கவனம் செலுத்தவும்';
+
+  @override
+  String get includeLeavesStemsFruits =>
+      'இலைகள், தண்டுகள் அல்லது பழங்களைச் சேர்க்கவும்';
+
+  @override
+  String get avoidBlurryDarkImages =>
+      'மங்கலான அல்லது இருண்ட படங்களைத் தவிர்க்கவும்';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'முந்தைய நோயறிதல்கள் இல்லை\nஉங்கள் முதல் தாவர புகைப்படத்தை எடுங்கள்!';
+
+  @override
+  String get cropsSelected => 'பயிர்கள் தேர்ந்தெடுக்கப்பட்டன';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop =>
+      'குறைந்தது ஒரு பயிரையாவது தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get rice => 'அரிசி';
+
+  @override
+  String get wheat => 'கோதுமை';
+
+  @override
+  String get corn => 'சோளம்';
+
+  @override
+  String get tomato => 'தக்காளி';
+
+  @override
+  String get potato => 'உருளைக்கிழங்கு';
+
+  @override
+  String get onion => 'வெங்காயம்';
+
+  @override
+  String get cotton => 'பருத்தி';
+
+  @override
+  String get sugarcane => 'கரும்பு';
+
+  @override
+  String get soybean => 'சோயாபீன்';
+
+  @override
+  String get millet => 'கம்பு';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'உங்கள் குறிப்பிட்ட பயிர்கள் மற்றும் வேளாண் நிலைகளுக்கான சிறந்த பரிந்துரைகளை வழங்க உங்கள் இருப்பிடத்தின் அடிப்படையில் உங்கள் மண் வகையை தானாகவே கண்டறிவோம்.';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'உங்கள் குறிப்பிட்ட பயிர்கள் மற்றும் வேளாண் நிலைகளுக்கான சிறந்த பரிந்துரைகளை வழங்க உங்கள் இருப்பிடத்தின் அடிப்படையில் உங்கள் மண் வகையை தானாகவே கண்டறிவோம்.';
 }

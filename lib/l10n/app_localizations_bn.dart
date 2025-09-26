@@ -242,4 +242,78 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get comingSoon => 'শীঘ্রই আসছে';
+
+  @override
+  String get enterFarmName => 'আপনার খামারের নাম লিখুন';
+
+  @override
+  String get enterFarmSize => 'একরে খামারের আকার লিখুন';
+
+  @override
+  String get farmDetailsDescription =>
+      'আমাদের আপনার খামার সম্পর্কে জানান। আমরা আপনার অবস্থান ব্যবহার করে মাটির ধরন স্বয়ংক্রিয়ভাবে সনাক্ত করব।';
+
+  @override
+  String get howToGetBestResults => 'সেরা ফলাফল কীভাবে পাওয়া যায়';
+
+  @override
+  String get takeClearWellLitPhotos => 'স্পষ্ট, ভালোভাবে আলোকিত ছবি নিন';
+
+  @override
+  String get focusOnAffectedAreas => 'প্রভাবিত অঞ্চলগুলিতে ফোকাস করুন';
+
+  @override
+  String get includeLeavesStemsFruits => 'পাতা, ডান্ডা বা ফল অন্তর্ভুক্ত করুন';
+
+  @override
+  String get avoidBlurryDarkImages => 'অস্পষ্ট বা অন্ধকার ছবি এড়িয়ে চলুন';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'কোনও পূর্ববর্তী নির্ণয় নেই\nআপনার প্রথম উদ্ভিদ ছবি নিন!';
+
+  @override
+  String get cropsSelected => 'ফসলগুলি নির্বাচিত';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop =>
+      'অনুগ্রহ করে কমপক্ষে একটি ফসল নির্বাচন করুন';
+
+  @override
+  String get rice => 'ধান';
+
+  @override
+  String get wheat => 'গম';
+
+  @override
+  String get corn => 'ভুট্টা';
+
+  @override
+  String get tomato => 'টমেটো';
+
+  @override
+  String get potato => 'আলু';
+
+  @override
+  String get onion => 'পেঁয়াজ';
+
+  @override
+  String get cotton => 'তুলা';
+
+  @override
+  String get sugarcane => 'আখ';
+
+  @override
+  String get soybean => 'সয়াবিন';
+
+  @override
+  String get millet => 'বাজরা';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'আপনার নির্দিষ্ট ফসল এবং কৃষি শর্তাবলীর জন্য উন্নত পরামর্শ প্রদান করতে আমরা আপনার অবস্থানের ভিত্তিতে আপনার মাটির ধরন স্বয়ংক্রিয়ভাবে সনাক্ত করব।';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'আপনার নির্দিষ্ট ফসল এবং কৃষি শর্তাবলীর জন্য উন্নত পরামর্শ প্রদান করতে আমরা আপনার অবস্থানের ভিত্তিতে আপনার মাটির ধরন স্বয়ংক্রিয়ভাবে সনাক্ত করব।';
 }

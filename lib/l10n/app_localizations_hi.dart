@@ -242,4 +242,78 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get comingSoon => 'जल्द आ रहा है';
+
+  @override
+  String get enterFarmName => 'अपने खेत का नाम दर्ज करें';
+
+  @override
+  String get enterFarmSize => 'एकड़ में खेत का आकार दर्ज करें';
+
+  @override
+  String get farmDetailsDescription =>
+      'हमें अपने खेत के बारे में बताएं। हम आपके स्थान का उपयोग करके मिट्टी के प्रकार का स्वचालित रूप से पता लगा लेंगे।';
+
+  @override
+  String get howToGetBestResults => 'सर्वोत्तम परिणाम कैसे प्राप्त करें';
+
+  @override
+  String get takeClearWellLitPhotos => 'स्पष्ट, अच्छी रोशनी वाली तस्वीरें लें';
+
+  @override
+  String get focusOnAffectedAreas =>
+      'प्रभावित क्षेत्रों पर ध्यान केंद्रित करें';
+
+  @override
+  String get includeLeavesStemsFruits => 'पत्ते, तने या फल शामिल करें';
+
+  @override
+  String get avoidBlurryDarkImages => 'धुंधली या अंधेरी छवियों से बचें';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'कोई पिछला निदान नहीं\nअपनी पहली पौधे की तस्वीर लें!';
+
+  @override
+  String get cropsSelected => 'फसलें चयनित';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop => 'कृपया कम से कम एक फसल चुनें';
+
+  @override
+  String get rice => 'चावल';
+
+  @override
+  String get wheat => 'गेहूं';
+
+  @override
+  String get corn => 'मक्का';
+
+  @override
+  String get tomato => 'टमाटर';
+
+  @override
+  String get potato => 'आलू';
+
+  @override
+  String get onion => 'प्याज';
+
+  @override
+  String get cotton => 'रुई';
+
+  @override
+  String get sugarcane => 'गन्ना';
+
+  @override
+  String get soybean => 'सोयाबीन';
+
+  @override
+  String get millet => 'बाजरा';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'हम आपकी विशिष्ट फसलों और खेती की स्थितियों के लिए बेहतर अनुशंसाएं प्रदान करने के लिए आपके स्थान के आधार पर स्वचालित रूप से आपकी मिट्टी के प्रकार का पता लगा लेंगे।';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'हम आपकी विशिष्ट फसलों और खेती की स्थितियों के लिए बेहतर अनुशंसाएं प्रदान करने के लिए आपके स्थान के आधार पर स्वचालित रूप से आपकी मिट्टी के प्रकार का पता लगा लेंगे।';
 }

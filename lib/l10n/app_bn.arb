@@ -126,5 +126,26 @@
   "startVoiceInput": "ভয়েস ইনপুট শুরু করুন",
   "listeningSpeak": "শোনা হচ্ছে... আপনার কৃষি প্রশ্ন বলুন",
   "askAnythingAboutFarming": "কৃষি সম্পর্কে যেকোনো কিছু জিজ্ঞাসা করুন...",
-  "sendMessage": "বার্তা পাঠান"
+  "sendMessage": "বার্তা পাঠান",
+  
+  "howToGetBestResults": "সেরা ফলাফল কীভাবে পাওয়া যায়",
+  "takeClearWellLitPhotos": "স্পষ্ট, ভালোভাবে আলোকিত ছবি নিন",
+  "focusOnAffectedAreas": "প্রভাবিত অঞ্চলগুলিতে ফোকাস করুন",
+  "includeLeavesStemsFruits": "পাতা, ডান্ডা বা ফল অন্তর্ভুক্ত করুন",
+  "avoidBlurryDarkImages": "অস্পষ্ট বা অন্ধকার ছবি এড়িয়ে চলুন",
+  "noPreviousDiagnoses": "কোনও পূর্ববর্তী নির্ণয় নেই\nআপনার প্রথম উদ্ভিদ ছবি নিন!",
+  "cropsSelected": "ফসলগুলি নির্বাচিত",
+  "pleaseSelectAtLeastOneCrop": "অনুগ্রহ করে কমপক্ষে একটি ফসল নির্বাচন করুন",
+  "rice": "ধান",
+  "wheat": "গম",
+  "corn": "ভুট্টা",
+  "tomato": "টমেটো",
+  "potato": "আলু",
+  "onion": "পেঁয়াজ",
+  "cotton": "তুলা",
+  "sugarcane": "আখ",
+  "soybean": "সয়াবিন",
+  "millet": "বাজরা",
+  "weWillAutomaticallyDetectSoilType": "আপনার নির্দিষ্ট ফসল এবং কৃষি শর্তাবলীর জন্য উন্নত পরামর্শ প্রদান করতে আমরা আপনার অবস্থানের ভিত্তিতে আপনার মাটির ধরন স্বয়ংক্রিয়ভাবে সনাক্ত করব।",
+  "weWillAutomaticallyDetectSoilTypeTitle": "আপনার নির্দিষ্ট ফসল এবং কৃষি শর্তাবলীর জন্য উন্নত পরামর্শ প্রদান করতে আমরা আপনার অবস্থানের ভিত্তিতে আপনার মাটির ধরন স্বয়ংক্রিয়ভাবে সনাক্ত করব।"
 }

@@ -126,5 +126,26 @@
   "startVoiceInput": "आवाज इनपुट सुरू करा",
   "listeningSpeak": "ऐकत आहे... तुमचा शेती विषयक प्रश्न बोला",
   "askAnythingAboutFarming": "शेतीबद्दल काहीही विचारा...",
-  "sendMessage": "संदेश पाठवा"
+  "sendMessage": "संदेश पाठवा",
+  
+  "howToGetBestResults": "सर्वोत्तम परिणाम कसे मिळवायचे",
+  "takeClearWellLitPhotos": "स्पष्ट, चांगल्या प्रकाशातील फोटो घ्या",
+  "focusOnAffectedAreas": "प्रभावित भागांवर लक्ष केंद्रित करा",
+  "includeLeavesStemsFruits": "पाने, पाटे किंवा फळे समाविष्ट करा",
+  "avoidBlurryDarkImages": "अस्पष्ट किंवा गडद प्रतिमा टाळा",
+  "noPreviousDiagnoses": "मागील निदाने नाहीत\nतुमचा पहिला वनस्पती फोटो घ्या!",
+  "cropsSelected": "पिके निवडली",
+  "pleaseSelectAtLeastOneCrop": "कृपया किमान एक पिक निवडा",
+  "rice": "तांदूळ",
+  "wheat": "गहू",
+  "corn": "मका",
+  "tomato": "टोमॅटो",
+  "potato": "बटाटा",
+  "onion": "कांदा",
+  "cotton": "रुई",
+  "sugarcane": "ऊस",
+  "soybean": "सोयाबीन",
+  "millet": "बाजरी",
+  "weWillAutomaticallyDetectSoilType": "तुमच्या निर्दिष्ट पिकांसाठी आणि शेतीच्या परिस्थितींसाठी उत्तम शिफारसी देण्यासाठी आम्ही तुमच्या स्थानाच्या आधारावर तुमच्या मातीच्या प्रकाराची स्वयंचलितपणे ओळख करू.",
+  "weWillAutomaticallyDetectSoilTypeTitle": "तुमच्या निर्दिष्ट पिकांसाठी आणि शेतीच्या परिस्थितींसाठी उत्तम शिफारसी देण्यासाठी आम्ही तुमच्या स्थानाच्या आधारावर तुमच्या मातीच्या प्रकाराची स्वयंचलितपणे ओळख करू."
 }

@@ -126,5 +126,26 @@
   "startVoiceInput": "ਆਵਾਜ਼ ਇਨਪੁੱਟ ਸ਼ੁਰੂ ਕਰੋ",
   "listeningSpeak": "ਸੁਣਿਆ ਜਾ ਰਿਹਾ ਹੈ... ਆਪਣੇ ਖੇਤੀਬਾੜੀ ਦੇ ਸਵਾਲ ਬੋਲੋ",
   "askAnythingAboutFarming": "ਖੇਤੀਬਾੜੀ ਬਾਰੇ ਕੁਝ ਵੀ ਪੁੱਛੋ...",
-  "sendMessage": "ਸੁਨੇਹਾ ਭੇਜੋ"
+  "sendMessage": "ਸੁਨੇਹਾ ਭੇਜੋ",
+  
+  "howToGetBestResults": "ਸਭ ਤੋਂ ਵਧੀਆ ਨਤੀਜੇ ਕਿਵੇਂ ਪ੍ਰਾਪਤ ਕਰੀਏ",
+  "takeClearWellLitPhotos": "ਸਪਸ਼ਟ, ਚੰਗੀ ਤਰ੍ਹਾਂ ਰੌਸ਼ਨ ਫੋਟੋਆਂ ਲਓ",
+  "focusOnAffectedAreas": "ਪ੍ਰਭਾਵਿਤ ਖੇਤਰਾਂ 'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਿਤ ਕਰੋ",
+  "includeLeavesStemsFruits": "ਪੱਤੇ, ਡੰਡੇ ਜਾਂ ਫਲ ਸ਼ਾਮਲ ਕਰੋ",
+  "avoidBlurryDarkImages": "ਧੁੰਦਲੀਆਂ ਜਾਂ ਹਨੇਰੀਆਂ ਚਿੱਤਰਾਂ ਨੂੰ ਟਾਲੋ",
+  "noPreviousDiagnoses": "ਕੋਈ ਪਿਛਲੇ ਨਿਦਾਨ ਨਹੀਂ\nਆਪਣੀ ਪਹਿਲੀ ਵਨਸਪਤੀ ਦੀ ਫੋਟੋ ਲਓ!",
+  "cropsSelected": "ਫਸਲਾਂ ਦੀ ਚੋਣ ਕੀਤੀ ਗਈ",
+  "pleaseSelectAtLeastOneCrop": "ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ ਘੱਟ ਇੱਕ ਫਸਲ ਦੀ ਚੋਣ ਕਰੋ",
+  "rice": "ਚਾਵਲ",
+  "wheat": "ਗੇਹੂੰ",
+  "corn": "ਮਕਈ",
+  "tomato": "ਟਮਾਟਰ",
+  "potato": "ਆਲੂ",
+  "onion": "ਪਿਆਜ਼",
+  "cotton": "ਰੁਈ",
+  "sugarcane": "ਗੰਨਾ",
+  "soybean": "ਸੋਇਆਬੀਨ",
+  "millet": "ਬਾਜਰਾ",
+  "weWillAutomaticallyDetectSoilType": "ਤੁਹਾਡੀ ਖਾਸ ਫਸਲਾਂ ਅਤੇ ਖੇਤੀਬਾੜੀ ਦੀਆਂ ਸਥਿਤੀਆਂ ਲਈ ਵਧੀਆ ਸਲਾਹ ਦੇਣ ਲਈ ਅਸੀਂ ਤੁਹਾਡੇ ਸਥਾਨ ਦੇ ਆਧਾਰ 'ਤੇ ਤੁਹਾਡੀ ਮਿੱਟੀ ਦੀ ਕਿਸਮ ਨੂੰ ਸਵੈਚਲਿਤ ਢੰਗ ਨਾਲ ਪਛਾਣਾਂਗੇ।",
+  "weWillAutomaticallyDetectSoilTypeTitle": "ਤੁਹਾਡੀ ਖਾਸ ਫਸਲਾਂ ਅਤੇ ਖੇਤੀਬਾੜੀ ਦੀਆਂ ਸਥਿਤੀਆਂ ਲਈ ਵਧੀਆ ਸਲਾਹ ਦੇਣ ਲਈ ਅਸੀਂ ਤੁਹਾਡੇ ਸਥਾਨ ਦੇ ਆਧਾਰ 'ਤੇ ਤੁਹਾਡੀ ਮਿੱਟੀ ਦੀ ਕਿਸਮ ਨੂੰ ਸਵੈਚਲਿਤ ਢੰਗ ਨਾਲ ਪਛਾਣਾਂਗੇ।"
 }

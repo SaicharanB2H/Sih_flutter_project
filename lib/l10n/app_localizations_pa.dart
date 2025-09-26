@@ -242,4 +242,78 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get comingSoon => 'ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ';
+
+  @override
+  String get enterFarmName => 'ਆਪਣੇ ਖੇਤ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ';
+
+  @override
+  String get enterFarmSize => 'ਏਕੜ ਵਿੱਚ ਖੇਤ ਦਾ ਆਕਾਰ ਦਰਜ ਕਰੋ';
+
+  @override
+  String get farmDetailsDescription =>
+      'ਸਾਨੂੰ ਆਪਣੇ ਖੇਤ ਬਾਰੇ ਦੱਸੋ। ਅਸੀਂ ਤੁਹਾਡੇ ਸਥਾਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਦੀ ਕਿਸਮ ਨੂੰ ਆਟੋਮੈਟਿਕ ਤੌਰ \'ਤੇ ਪਛਾਣ ਲਵਾਂਗੇ।';
+
+  @override
+  String get howToGetBestResults => 'ਸਭ ਤੋਂ ਵਧੀਆ ਨਤੀਜੇ ਕਿਵੇਂ ਪ੍ਰਾਪਤ ਕਰੀਏ';
+
+  @override
+  String get takeClearWellLitPhotos => 'ਸਪਸ਼ਟ, ਚੰਗੀ ਤਰ੍ਹਾਂ ਰੌਸ਼ਨ ਫੋਟੋਆਂ ਲਓ';
+
+  @override
+  String get focusOnAffectedAreas => 'ਪ੍ਰਭਾਵਿਤ ਖੇਤਰਾਂ \'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਿਤ ਕਰੋ';
+
+  @override
+  String get includeLeavesStemsFruits => 'ਪੱਤੇ, ਡੰਡੇ ਜਾਂ ਫਲ ਸ਼ਾਮਲ ਕਰੋ';
+
+  @override
+  String get avoidBlurryDarkImages => 'ਧੁੰਦਲੀਆਂ ਜਾਂ ਹਨੇਰੀਆਂ ਚਿੱਤਰਾਂ ਨੂੰ ਟਾਲੋ';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'ਕੋਈ ਪਿਛਲੇ ਨਿਦਾਨ ਨਹੀਂ\nਆਪਣੀ ਪਹਿਲੀ ਵਨਸਪਤੀ ਦੀ ਫੋਟੋ ਲਓ!';
+
+  @override
+  String get cropsSelected => 'ਫਸਲਾਂ ਦੀ ਚੋਣ ਕੀਤੀ ਗਈ';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop =>
+      'ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ ਘੱਟ ਇੱਕ ਫਸਲ ਦੀ ਚੋਣ ਕਰੋ';
+
+  @override
+  String get rice => 'ਚਾਵਲ';
+
+  @override
+  String get wheat => 'ਗੇਹੂੰ';
+
+  @override
+  String get corn => 'ਮਕਈ';
+
+  @override
+  String get tomato => 'ਟਮਾਟਰ';
+
+  @override
+  String get potato => 'ਆਲੂ';
+
+  @override
+  String get onion => 'ਪਿਆਜ਼';
+
+  @override
+  String get cotton => 'ਰੁਈ';
+
+  @override
+  String get sugarcane => 'ਗੰਨਾ';
+
+  @override
+  String get soybean => 'ਸੋਇਆਬੀਨ';
+
+  @override
+  String get millet => 'ਬਾਜਰਾ';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'ਤੁਹਾਡੀ ਖਾਸ ਫਸਲਾਂ ਅਤੇ ਖੇਤੀਬਾੜੀ ਦੀਆਂ ਸਥਿਤੀਆਂ ਲਈ ਵਧੀਆ ਸਲਾਹ ਦੇਣ ਲਈ ਅਸੀਂ ਤੁਹਾਡੇ ਸਥਾਨ ਦੇ ਆਧਾਰ \'ਤੇ ਤੁਹਾਡੀ ਮਿੱਟੀ ਦੀ ਕਿਸਮ ਨੂੰ ਸਵੈਚਲਿਤ ਢੰਗ ਨਾਲ ਪਛਾਣਾਂਗੇ।';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'ਤੁਹਾਡੀ ਖਾਸ ਫਸਲਾਂ ਅਤੇ ਖੇਤੀਬਾੜੀ ਦੀਆਂ ਸਥਿਤੀਆਂ ਲਈ ਵਧੀਆ ਸਲਾਹ ਦੇਣ ਲਈ ਅਸੀਂ ਤੁਹਾਡੇ ਸਥਾਨ ਦੇ ਆਧਾਰ \'ਤੇ ਤੁਹਾਡੀ ਮਿੱਟੀ ਦੀ ਕਿਸਮ ਨੂੰ ਸਵੈਚਲਿਤ ਢੰਗ ਨਾਲ ਪਛਾਣਾਂਗੇ।';
 }

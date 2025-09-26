@@ -242,4 +242,82 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get comingSoon => 'ഉടൻ വരുന്നു';
+
+  @override
+  String get enterFarmName => 'നിങ്ങളുടെ കൃഷിഭൂമിയുടെ പേര് നൽകുക';
+
+  @override
+  String get enterFarmSize => 'ഏക്കറുകളിൽ കൃഷിഭൂമിയുടെ വലിപ്പം നൽകുക';
+
+  @override
+  String get farmDetailsDescription =>
+      'നിങ്ങളുടെ കൃഷിഭൂമിയെക്കുറിച്ച് ഞങ്ങളോട് പറയുക. നിങ്ങളുടെ സ്ഥാനം ഉപയോഗിച്ച് മണ്ണിന്റെ തരം ഞങ്ങൾ സ്വയമേവ കണ്ടെത്തും.';
+
+  @override
+  String get howToGetBestResults => 'ഏറ്റവും മികച്ച ഫലങ്ങൾ എങ്ങനെ ലഭിക്കാം';
+
+  @override
+  String get takeClearWellLitPhotos =>
+      'വ്യക്തമായ, നന്നായി വെളിച്ചപ്പെടുത്തിയ ഫോട്ടോകൾ എടുക്കുക';
+
+  @override
+  String get focusOnAffectedAreas =>
+      'ബാധിതമായ പ്രദേശങ്ങളിൽ ശ്രദ്ധ കേന്ദ്രീകരിക്കുക';
+
+  @override
+  String get includeLeavesStemsFruits =>
+      'ഇലകൾ, കാണ്ടങ്ങൾ അല്ലെങ്കിൽ പഴങ്ങൾ ഉൾപ്പെടുത്തുക';
+
+  @override
+  String get avoidBlurryDarkImages =>
+      'മങ്കിയ അല്ലെങ്കിൽ ഇരുണ്ട ചിത്രങ്ങൾ ഒഴിവാക്കുക';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'മുമ്പത്തെ രോഗനിർണ്ണയങ്ങളൊന്നുമില്ല\nനിങ്ങളുടെ ആദ്യത്തെ സസ്യ ഫോട്ടോ എടുക്കുക!';
+
+  @override
+  String get cropsSelected => 'വിളകൾ തിരഞ്ഞെടുത്തു';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop =>
+      'ദയവായി കുറഞ്ഞത് ഒരു വിള തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String get rice => 'അരി';
+
+  @override
+  String get wheat => 'ഗോതമ്പ്';
+
+  @override
+  String get corn => 'ചോളം';
+
+  @override
+  String get tomato => 'ടോമാറ്റോ';
+
+  @override
+  String get potato => 'ഉരുളക്കിഴങ്ങ്';
+
+  @override
+  String get onion => 'ഉള്ളിപ്പാവ';
+
+  @override
+  String get cotton => 'പരുത്തി';
+
+  @override
+  String get sugarcane => 'വെല്ലം';
+
+  @override
+  String get soybean => 'സോയാബീൻ';
+
+  @override
+  String get millet => 'കാരിപ്പുള്ളി';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'നിങ്ങളുടെ പ്രത്യേക വിളകൾക്കും കാർഷിക സാഹചര്യങ്ങൾക്കും മികച്ച ശിഫാരസുകൾ നൽകാൻ ഞങ്ങൾ നിങ്ങളുടെ സ്ഥാനത്തിന്റെ അടിസ്ഥാനത്തിൽ നിങ്ങളുടെ മണ്ണിന്റെ തരം സ്വയമേവ കണ്ടെത്തും.';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'നിങ്ങളുടെ പ്രത്യേക വിളകൾക്കും കാർഷിക സാഹചര്യങ്ങൾക്കും മികച്ച ശിഫാരസുകൾ നൽകാൻ ഞങ്ങൾ നിങ്ങളുടെ സ്ഥാനത്തിന്റെ അടിസ്ഥാനത്തിൽ നിങ്ങളുടെ മണ്ണിന്റെ തരം സ്വയമേവ കണ്ടെത്തും.';
 }

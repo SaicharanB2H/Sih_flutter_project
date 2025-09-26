@@ -242,4 +242,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comingSoon => 'Coming Soon';
+
+  @override
+  String get enterFarmName => 'Enter your farm name';
+
+  @override
+  String get enterFarmSize => 'Enter farm size in acres';
+
+  @override
+  String get farmDetailsDescription =>
+      'Tell us about your farm. We\'ll detect soil type automatically using your location.';
+
+  @override
+  String get howToGetBestResults => 'How to get the best results';
+
+  @override
+  String get takeClearWellLitPhotos => 'Take clear, well-lit photos';
+
+  @override
+  String get focusOnAffectedAreas => 'Focus on affected areas';
+
+  @override
+  String get includeLeavesStemsFruits => 'Include leaves, stems, or fruits';
+
+  @override
+  String get avoidBlurryDarkImages => 'Avoid blurry or dark images';
+
+  @override
+  String get noPreviousDiagnoses =>
+      'No previous diagnoses\nTake your first plant photo!';
+
+  @override
+  String get cropsSelected => 'crops selected';
+
+  @override
+  String get pleaseSelectAtLeastOneCrop => 'Please select at least one crop';
+
+  @override
+  String get rice => 'Rice';
+
+  @override
+  String get wheat => 'Wheat';
+
+  @override
+  String get corn => 'Corn';
+
+  @override
+  String get tomato => 'Tomato';
+
+  @override
+  String get potato => 'Potato';
+
+  @override
+  String get onion => 'Onion';
+
+  @override
+  String get cotton => 'Cotton';
+
+  @override
+  String get sugarcane => 'Sugarcane';
+
+  @override
+  String get soybean => 'Soybean';
+
+  @override
+  String get millet => 'Millet';
+
+  @override
+  String get weWillAutomaticallyDetectSoilType =>
+      'We will automatically detect your soil type based on your location to provide better recommendations for your specific crops and farming conditions.';
+
+  @override
+  String get weWillAutomaticallyDetectSoilTypeTitle =>
+      'We will automatically detect your soil type based on your location to provide better recommendations for your specific crops and farming conditions.';
 }

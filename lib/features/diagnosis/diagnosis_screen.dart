@@ -671,19 +671,17 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'How to get the best results', // Hardcoded as it's not in the localization file
+                          localizations.howToGetBestResults,
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
-                    const Text('• Take clear, well-lit photos'), // Hardcoded
-                    const Text('• Focus on affected areas'), // Hardcoded
-                    const Text(
-                      '• Include leaves, stems, or fruits',
-                    ), // Hardcoded
-                    const Text('• Avoid blurry or dark images'), // Hardcoded
+                    Text('• ${localizations.takeClearWellLitPhotos}'),
+                    Text('• ${localizations.focusOnAffectedAreas}'),
+                    Text('• ${localizations.includeLeavesStemsFruits}'),
+                    Text('• ${localizations.avoidBlurryDarkImages}'),
                   ],
                 ),
               ),
@@ -818,7 +816,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                     _recentDiagnoses.isEmpty
                         ? Center(
                             child: Text(
-                              'No previous diagnoses\nTake your first plant photo!', // Hardcoded
+                              localizations.noPreviousDiagnoses,
                               textAlign: TextAlign.center,
                               style: const TextStyle(color: Colors.grey),
                             ),
