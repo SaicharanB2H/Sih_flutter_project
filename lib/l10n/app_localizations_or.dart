@@ -319,4 +319,109 @@ class AppLocalizationsOr extends AppLocalizations {
   @override
   String get weWillAutomaticallyDetectSoilTypeTitle =>
       'ଆପଣଙ୍କର ନିର୍ଦ୍ଦିଷ୍ଟ ଫସଲ ଏବଂ କୃଷି ଅବସ୍ଥାଗୁଡ଼ିକ ପାଇଁ ଉତ୍ତମ ପରାମର୍ଶ ପ୍ରଦାନ କରିବା ପାଇଁ ଆମେ ଆପଣଙ୍କର ଅବସ୍ଥିତି ଉପରେ ଆଧାର କରି ଆପଣଙ୍କର ମାଟିର ପ୍ରକାରକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚିହ୍ନଟ କରିବୁ।';
+
+  @override
+  String get healthy => 'Healthy';
+
+  @override
+  String get disease => 'Disease';
+
+  @override
+  String get pest => 'Pest';
+
+  @override
+  String get nutrientDeficiency => 'Nutrient Deficiency';
+
+  @override
+  String get plantHealthy => 'Plant Healthy';
+
+  @override
+  String get bacterialLeafBlight => 'Bacterial Leaf Blight';
+
+  @override
+  String get brownSpot => 'Brown Spot';
+
+  @override
+  String get leafBlast => 'Leaf Blast';
+
+  @override
+  String get leafScald => 'Leaf Scald';
+
+  @override
+  String get narrowBrownSpot => 'Narrow Brown Spot';
+
+  @override
+  String get sheathBlight => 'Sheath Blight';
+
+  @override
+  String get stemRot => 'Stem Rot';
+
+  @override
+  String get yellowStemBorer => 'Yellow Stem Borer';
+
+  @override
+  String get brownPlantHopper => 'Brown Plant Hopper';
+
+  @override
+  String get gallMidge => 'Gall Midge';
+
+  @override
+  String get riceHispa => 'Rice Hispa';
+
+  @override
+  String get leafFolder => 'Leaf Folder';
+
+  @override
+  String get nitrogenDeficiency => 'Nitrogen Deficiency';
+
+  @override
+  String get phosphorusDeficiency => 'Phosphorus Deficiency';
+
+  @override
+  String get potassiumDeficiency => 'Potassium Deficiency';
+
+  @override
+  String get zincDeficiency => 'Zinc Deficiency';
+
+  @override
+  String get ironDeficiency => 'Iron Deficiency';
+
+  @override
+  String get spray => 'Spray';
+
+  @override
+  String get fertilizer => 'Fertilizer';
+
+  @override
+  String get pesticide => 'Pesticide';
+
+  @override
+  String get water => 'Water';
+
+  @override
+  String get pruning => 'Pruning';
+
+  @override
+  String get saveToHistory => 'Save to History';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get unknownCondition => 'Unknown Condition';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get analysisCompleted => 'Analysis completed';
+
+  @override
+  String get plantAnalysisComplete => 'Plant Analysis Complete';
+
+  @override
+  String get analysis => 'Analysis';
+
+  @override
+  String get consultAgriculturalExpert => 'Consult with agricultural expert';
 }

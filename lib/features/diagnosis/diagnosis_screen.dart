@@ -138,6 +138,27 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
   }
 
   Future<DiagnosisResult> _analyzeImageWithGemini(String base64Image) async {
+    final localizations = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).languageCode;
+
+    // Map locale codes to language names for the AI prompt
+    final languageMap = {
+      'en': 'English',
+      'as': 'Assamese',
+      'bn': 'Bengali',
+      'gu': 'Gujarati',
+      'hi': 'Hindi',
+      'kn': 'Kannada',
+      'ml': 'Malayalam',
+      'mr': 'Marathi',
+      'or': 'Odia',
+      'pa': 'Punjabi',
+      'ta': 'Tamil',
+      'te': 'Telugu',
+    };
+
+    final userLanguage = languageMap[locale] ?? 'English';
+
     const String apiUrl =
         'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
 
@@ -153,7 +174,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
           'parts': [
             {
               'text':
-                  'You are an expert agricultural AI assistant. Analyze this plant image for diseases, pests, or health issues. Provide:\n1. Diagnosis (specific condition name)\n2. Type (Healthy/Disease/Pest/Nutrient Deficiency)\n3. Confidence level (0-1)\n4. Detailed description\n5. List of specific treatment recommendations\n6.Also recommmend the fertilzers and pesticided\n\nFormat your response as JSON with these exact keys: condition, type, confidence, description, treatments (array of strings)',
+                  'You are an expert agricultural AI assistant. Analyze this plant image for diseases, pests, or health issues. Provide the response in $userLanguage language only.\n\nProvide:\n1. Diagnosis (specific condition name)\n2. Type (Healthy/Disease/Pest/Nutrient Deficiency)\n3. Confidence level (0-1)\n4. Detailed description\n5. List of specific treatment recommendations\n6. Also recommend the fertilizers and pesticides\n\nFormat your response as JSON with these exact keys: condition, type, confidence, description, treatments (array of strings)',
             },
             {
               'inline_data': {'mime_type': 'image/jpeg', 'data': base64Image},
@@ -204,10 +225,12 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
           final analysisData = json.decode(responseText);
 
           return DiagnosisResult(
-            condition: analysisData['condition'] ?? 'Unknown Condition',
-            type: analysisData['type'] ?? 'Unknown',
+            condition:
+                analysisData['condition'] ?? localizations.unknownCondition,
+            type: analysisData['type'] ?? localizations.unknown,
             confidence: (analysisData['confidence'] ?? 0.5).toDouble(),
-            description: analysisData['description'] ?? 'Analysis completed',
+            description:
+                analysisData['description'] ?? localizations.analysisCompleted,
             treatments: List<String>.from(analysisData['treatments'] ?? []),
           );
         } catch (e) {
@@ -223,11 +246,127 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
     throw Exception('Failed to analyze image with Gemini API');
   }
 
+  // Helper method to localize condition
+  String _localizeCondition(String condition) {
+    final localizations = AppLocalizations.of(context)!;
+
+    // Map common conditions to localized strings
+    switch (condition.toLowerCase()) {
+      case 'healthy':
+        return localizations.plantHealthy;
+      case 'bacterial leaf blight':
+        return localizations.bacterialLeafBlight;
+      case 'brown spot':
+        return localizations.brownSpot;
+      case 'leaf blast':
+        return localizations.leafBlast;
+      case 'leaf scald':
+        return localizations.leafScald;
+      case 'narrow brown spot':
+        return localizations.narrowBrownSpot;
+      case 'sheath blight':
+        return localizations.sheathBlight;
+      case 'stem rot':
+        return localizations.stemRot;
+      case 'yellow stem borer':
+        return localizations.yellowStemBorer;
+      case 'brown plant hopper':
+        return localizations.brownPlantHopper;
+      case 'gall midge':
+        return localizations.gallMidge;
+      case 'rice hispa':
+        return localizations.riceHispa;
+      case 'leaf folder':
+        return localizations.leafFolder;
+      case 'nitrogen deficiency':
+        return localizations.nitrogenDeficiency;
+      case 'phosphorus deficiency':
+        return localizations.phosphorusDeficiency;
+      case 'potassium deficiency':
+        return localizations.potassiumDeficiency;
+      case 'zinc deficiency':
+        return localizations.zincDeficiency;
+      case 'iron deficiency':
+        return localizations.ironDeficiency;
+      default:
+        return condition; // Return original if no localization found
+    }
+  }
+
+  // Helper method to localize type
+  String _localizeType(String type) {
+    final localizations = AppLocalizations.of(context)!;
+
+    switch (type.toLowerCase()) {
+      case 'healthy':
+        return localizations.healthy;
+      case 'disease':
+        return localizations.disease;
+      case 'pest':
+        return localizations.pest;
+      case 'nutrient deficiency':
+        return localizations.nutrientDeficiency;
+      default:
+        return type;
+    }
+  }
+
+  // Helper method to localize treatments
+  List<String> _localizeTreatments(List<String> treatments) {
+    final localizations = AppLocalizations.of(context)!;
+    final List<String> localizedTreatments = [];
+
+    for (String treatment in treatments) {
+      // Try to localize common treatments
+      String localized = _localizeTreatment(treatment);
+      localizedTreatments.add(localized);
+    }
+
+    return localizedTreatments;
+  }
+
+  // Helper method to localize a single treatment
+  String _localizeTreatment(String treatment) {
+    final localizations = AppLocalizations.of(context)!;
+
+    // Map common treatments to localized strings
+    if (treatment.toLowerCase().contains('spray')) {
+      return treatment.replaceAll(
+        RegExp(r'spray', caseSensitive: false),
+        localizations.spray,
+      );
+    } else if (treatment.toLowerCase().contains('fertilizer')) {
+      return treatment.replaceAll(
+        RegExp(r'fertilizer', caseSensitive: false),
+        localizations.fertilizer,
+      );
+    } else if (treatment.toLowerCase().contains('pesticide')) {
+      return treatment.replaceAll(
+        RegExp(r'pesticide', caseSensitive: false),
+        localizations.pesticide,
+      );
+    } else if (treatment.toLowerCase().contains('water')) {
+      return treatment.replaceAll(
+        RegExp(r'water', caseSensitive: false),
+        localizations.water,
+      );
+    } else if (treatment.toLowerCase().contains('pruning')) {
+      return treatment.replaceAll(
+        RegExp(r'pruning', caseSensitive: false),
+        localizations.pruning,
+      );
+    }
+
+    return treatment; // Return original if no localization found
+  }
+
   DiagnosisResult _parseTextResponse(String response) {
+    final localizations = AppLocalizations.of(context)!;
+
     // Simple text parsing fallback
     final lines = response.split('\n');
-    String condition = 'Plant Analysis Complete';
-    String type = 'Analysis';
+    String condition = localizations.plantAnalysisComplete;
+    String type = localizations.analysis;
     double confidence = 0.8;
     String description = response;
     List<String> treatments = [];
@@ -247,7 +386,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
       confidence: confidence,
       description: description,
       treatments: treatments.isEmpty
-          ? ['Consult with agricultural expert']
+          ? [localizations.consultAgriculturalExpert]
           : treatments,
     );
   }
@@ -368,6 +507,8 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
   void _showResultDialog() {
     if (_result == null) return;
 
+    final localizations = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -393,7 +534,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
-                  'Confidence: ${(_result!.confidence * 100).toStringAsFixed(1)}%',
+                  '${localizations.confidence}: ${(_result!.confidence * 100).toStringAsFixed(1)}%',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: _getColorForType(_result!.type),
                     fontWeight: FontWeight.bold,
@@ -411,7 +552,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
               if (_result!.treatments.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 Text(
-                  'Recommended Actions:',
+                  localizations.treatments,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -439,7 +580,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(localizations.close),
           ),
           ElevatedButton(
             onPressed: () {
@@ -448,7 +589,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                 _saveDiagnosisToStorage(_currentBase64Image!, _result!);
               }
             },
-            child: const Text('Save to History'),
+            child: Text(localizations.saveToHistory),
           ),
         ],
       ),
@@ -566,6 +707,8 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
   void _showDiagnosisDetails(DiagnosisResult diagnosis) {
     Navigator.pop(context); // Close history dialog first
 
+    final localizations = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -591,7 +734,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
-                  'Confidence: ${(diagnosis.confidence * 100).toStringAsFixed(1)}%',
+                  '${localizations.confidence}: ${(diagnosis.confidence * 100).toStringAsFixed(1)}%',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: _getColorForType(diagnosis.type),
                     fontWeight: FontWeight.bold,
@@ -606,7 +749,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
               if (diagnosis.treatments.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 Text(
-                  'Recommended Actions:',
+                  localizations.treatments,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -634,7 +777,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(localizations.close),
           ),
         ],
       ),

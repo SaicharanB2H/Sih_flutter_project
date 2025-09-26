@@ -723,6 +723,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We will automatically detect your soil type based on your location to provide better recommendations for your specific crops and farming conditions.'**
   String get weWillAutomaticallyDetectSoilTypeTitle;
+
+  /// No description provided for @healthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy'**
+  String get healthy;
+
+  /// No description provided for @disease.
+  ///
+  /// In en, this message translates to:
+  /// **'Disease'**
+  String get disease;
+
+  /// No description provided for @pest.
+  ///
+  /// In en, this message translates to:
+  /// **'Pest'**
+  String get pest;
+
+  /// No description provided for @nutrientDeficiency.
+  ///
+  /// In en, this message translates to:
+  /// **'Nutrient Deficiency'**
+  String get nutrientDeficiency;
+
+  /// No description provided for @plantHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Plant Healthy'**
+  String get plantHealthy;
+
+  /// No description provided for @bacterialLeafBlight.
+  ///
+  /// In en, this message translates to:
+  /// **'Bacterial Leaf Blight'**
+  String get bacterialLeafBlight;
+
+  /// No description provided for @brownSpot.
+  ///
+  /// In en, this message translates to:
+  /// **'Brown Spot'**
+  String get brownSpot;
+
+  /// No description provided for @leafBlast.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaf Blast'**
+  String get leafBlast;
+
+  /// No description provided for @leafScald.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaf Scald'**
+  String get leafScald;
+
+  /// No description provided for @narrowBrownSpot.
+  ///
+  /// In en, this message translates to:
+  /// **'Narrow Brown Spot'**
+  String get narrowBrownSpot;
+
+  /// No description provided for @sheathBlight.
+  ///
+  /// In en, this message translates to:
+  /// **'Sheath Blight'**
+  String get sheathBlight;
+
+  /// No description provided for @stemRot.
+  ///
+  /// In en, this message translates to:
+  /// **'Stem Rot'**
+  String get stemRot;
+
+  /// No description provided for @yellowStemBorer.
+  ///
+  /// In en, this message translates to:
+  /// **'Yellow Stem Borer'**
+  String get yellowStemBorer;
+
+  /// No description provided for @brownPlantHopper.
+  ///
+  /// In en, this message translates to:
+  /// **'Brown Plant Hopper'**
+  String get brownPlantHopper;
+
+  /// No description provided for @gallMidge.
+  ///
+  /// In en, this message translates to:
+  /// **'Gall Midge'**
+  String get gallMidge;
+
+  /// No description provided for @riceHispa.
+  ///
+  /// In en, this message translates to:
+  /// **'Rice Hispa'**
+  String get riceHispa;
+
+  /// No description provided for @leafFolder.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaf Folder'**
+  String get leafFolder;
+
+  /// No description provided for @nitrogenDeficiency.
+  ///
+  /// In en, this message translates to:
+  /// **'Nitrogen Deficiency'**
+  String get nitrogenDeficiency;
+
+  /// No description provided for @phosphorusDeficiency.
+  ///
+  /// In en, this message translates to:
+  /// **'Phosphorus Deficiency'**
+  String get phosphorusDeficiency;
+
+  /// No description provided for @potassiumDeficiency.
+  ///
+  /// In en, this message translates to:
+  /// **'Potassium Deficiency'**
+  String get potassiumDeficiency;
+
+  /// No description provided for @zincDeficiency.
+  ///
+  /// In en, this message translates to:
+  /// **'Zinc Deficiency'**
+  String get zincDeficiency;
+
+  /// No description provided for @ironDeficiency.
+  ///
+  /// In en, this message translates to:
+  /// **'Iron Deficiency'**
+  String get ironDeficiency;
+
+  /// No description provided for @spray.
+  ///
+  /// In en, this message translates to:
+  /// **'Spray'**
+  String get spray;
+
+  /// No description provided for @fertilizer.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer'**
+  String get fertilizer;
+
+  /// No description provided for @pesticide.
+  ///
+  /// In en, this message translates to:
+  /// **'Pesticide'**
+  String get pesticide;
+
+  /// No description provided for @water.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get water;
+
+  /// No description provided for @pruning.
+  ///
+  /// In en, this message translates to:
+  /// **'Pruning'**
+  String get pruning;
+
+  /// No description provided for @saveToHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to History'**
+  String get saveToHistory;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @unknownCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Condition'**
+  String get unknownCondition;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @analysisCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis completed'**
+  String get analysisCompleted;
+
+  /// No description provided for @plantAnalysisComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Plant Analysis Complete'**
+  String get plantAnalysisComplete;
+
+  /// No description provided for @analysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis'**
+  String get analysis;
+
+  /// No description provided for @consultAgriculturalExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'Consult with agricultural expert'**
+  String get consultAgriculturalExpert;
 }
 
 class _AppLocalizationsDelegate

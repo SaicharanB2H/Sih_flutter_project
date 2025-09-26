@@ -315,4 +315,109 @@ class AppLocalizationsAs extends AppLocalizations {
   @override
   String get weWillAutomaticallyDetectSoilTypeTitle =>
       'আপোনাৰ নিৰ্দিষ্ট ফসল আৰু কৃষিৰ অৱস্থাৰ বাবে উন্নত পৰামৰ্শ প্ৰদান কৰিবলৈ আমি আপোনাৰ অৱস্থানৰ ওপৰত ভিত্তি কৰি আপোনাৰ মাটিৰ ধৰণ স্বয়ংক্ৰিয়ভাৱে চিনাক্ত কৰিম।';
+
+  @override
+  String get healthy => 'সুস্থ';
+
+  @override
+  String get disease => 'ৰোগ';
+
+  @override
+  String get pest => 'কীট';
+
+  @override
+  String get nutrientDeficiency => 'পুষ্টি ঘাটতি';
+
+  @override
+  String get plantHealthy => 'উদ্ভিদ সুস্থ';
+
+  @override
+  String get bacterialLeafBlight => 'বেক্টেৰিয়াল পাত ৰোগ';
+
+  @override
+  String get brownSpot => 'বাদামী ৰঙৰ দাগ';
+
+  @override
+  String get leafBlast => 'পাত ফুটা';
+
+  @override
+  String get leafScald => 'পাত খৰচোৱা';
+
+  @override
+  String get narrowBrownSpot => 'সৰু বাদামী ৰঙৰ দাগ';
+
+  @override
+  String get sheathBlight => 'শিওৰ ফুটা';
+
+  @override
+  String get stemRot => 'ডাঙৰ পচা';
+
+  @override
+  String get yellowStemBorer => 'হালধীয়া ডাঙৰ বোৰাৰ';
+
+  @override
+  String get brownPlantHopper => 'বাদামী ৰঙৰ হপাৰ';
+
+  @override
+  String get gallMidge => 'গল মিজ';
+
+  @override
+  String get riceHispa => 'ধান হিসপা';
+
+  @override
+  String get leafFolder => 'পাত ফোল্ডাৰ';
+
+  @override
+  String get nitrogenDeficiency => 'নাইট্ৰজেন ঘাটতি';
+
+  @override
+  String get phosphorusDeficiency => 'ফছফৰাচ ঘাটতি';
+
+  @override
+  String get potassiumDeficiency => 'পটেছিয়াম ঘাটতি';
+
+  @override
+  String get zincDeficiency => 'জিংক ঘাটতি';
+
+  @override
+  String get ironDeficiency => 'আয়ৰন ঘাটতি';
+
+  @override
+  String get spray => 'স্প্ৰে';
+
+  @override
+  String get fertilizer => 'সাৰ';
+
+  @override
+  String get pesticide => 'কীটনাশক';
+
+  @override
+  String get water => 'পানী';
+
+  @override
+  String get pruning => 'ছাটা';
+
+  @override
+  String get saveToHistory => 'ইতিহাচলৈ সংৰক্ষণ কৰক';
+
+  @override
+  String get close => 'বন্ধ কৰক';
+
+  @override
+  String get unknownCondition => 'অজ্ঞাত অৱস্থা';
+
+  @override
+  String get unknown => 'অজ্ঞাত';
+
+  @override
+  String get analysisCompleted => 'বিশ্লেষণ সম্পূৰ্ণ';
+
+  @override
+  String get plantAnalysisComplete => 'উদ্ভিদ বিশ্লেষণ সম্পূৰ্ণ';
+
+  @override
+  String get analysis => 'বিশ্লেষণ';
+
+  @override
+  String get consultAgriculturalExpert => 'কৃষি বিশেষজ্ঞৰ সৈতে পৰামৰ্শ কৰক';
 }
